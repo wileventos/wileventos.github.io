@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Agenda WIL EVENTOS — datas disponíveis</title>
+<meta name="description" content="Consulte as datas disponíveis do espaço WIL EVENTOS em Teresina-PI e solicite seu orçamento pelo WhatsApp.">
+<meta property="og:title" content="Agenda WIL EVENTOS">
+<meta property="og:description" content="Veja as datas disponíveis e solicite seu orçamento pelo WhatsApp.">
+<meta property="og:image" content="https://wileventos.github.io/logo.png">
+<meta property="og:url" content="https://wileventos.github.io/">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0f5a46">
+<link rel="icon" href="logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#0f5a46;--verde-esc:#0f2a21;--texto:#13261f;--suave:#4d6158;--fundo:#f3f6f4;--linha:#cbd8d1}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fundo);color:var(--texto);font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-text-size-adjust:100%}
+.pagina{max-width:480px;margin:0 auto;padding:22px 16px 32px;display:flex;flex-direction:column;gap:18px}
+.topo{display:flex;align-items:center;gap:12px}
+.topo img{width:56px;height:56px;object-fit:contain;border-radius:14px;background:#fff;padding:4px}
+.marca{font-size:20px;font-weight:800;letter-spacing:.5px;color:#0f3d30}
+.local{font-size:13px;color:var(--suave)}
+h1{margin:0;font-size:26px;line-height:1.15;font-weight:800;color:var(--verde-esc)}
+.sub{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--suave)}
+.cartao{display:flex;flex-direction:column;gap:14px;padding:16px 14px 18px;background:#fff;border-radius:20px;box-shadow:0 1px 2px rgba(16,40,32,.06),0 8px 24px rgba(16,40,32,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.seta{width:44px;height:44px;border-radius:12px;border:1.5px solid #dbe5e0;background:#f7faf8;color:#0f3d30;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.seta:disabled{opacity:.35;cursor:default}
+.mes{text-align:center}.mes b{display:block;font-size:18px;font-weight:800;color:var(--verde-esc)}.mes span{font-size:12px;font-weight:600;color:#2f6b55}
+.grade{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.semana{text-align:center;font-size:12px;font-weight:700;color:#5b6e66}
+.dia{width:100%;height:44px;border-radius:12px;padding:0;display:flex;align-items:center;justify-content:center;font:700 15px 'Plus Jakarta Sans',system-ui,sans-serif;border:1.5px solid transparent;-webkit-tap-highlight-color:transparent}
+.dia.livre{background:#fff;color:#0f3d30;border-color:#9cc3b2;cursor:pointer}
+.dia.negociacao{background:#f8d77e;color:#4a3300;border-color:#d9a521;cursor:pointer}
+.dia.reservado{background:#3b4744;color:#cfd7d4;border-color:#3b4744;text-decoration:line-through;cursor:not-allowed}
+.dia.passado{background:transparent;color:#8d9b96;cursor:default}
+.dia.hoje{box-shadow:0 0 0 2px var(--verde)}
+.dia:focus-visible,.botao:focus-visible,.seta:focus-visible,.voltar:focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}
+.legenda{display:flex;flex-wrap:wrap;gap:8px 14px;padding-top:4px;font-size:12px;font-weight:600;color:#33463e}
+.legenda div{display:flex;align-items:center;gap:6px}.legenda i{width:16px;height:16px;border-radius:5px;display:inline-block}
+.aviso{display:flex;gap:10px;padding:12px 14px;border-radius:14px;background:#e6f0eb;font-size:13px;line-height:1.45;color:#23392f}
+.rodape{text-align:center;font-size:12px;color:#5b6e66}
+.voltar{align-self:flex-start;display:flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border:none;background:transparent;font:700 14px 'Plus Jakarta Sans',system-ui,sans-serif;color:var(--verde);cursor:pointer}
+.pilula{align-self:flex-start;padding:8px 12px;border-radius:10px;background:var(--verde);color:#fff;font-size:14px;font-weight:700}
+.alerta-neg{padding:12px 14px;border-radius:14px;background:#fdf0c8;border:1.5px solid #e6b73c;font-size:13px;line-height:1.45;color:#4a3300}
+.form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
+.form .inteiro{grid-column:span 2}
+label{display:block;margin:0 0 6px;font-size:13px;font-weight:600;color:#33463e}
+.campo{width:100%;height:48px;padding:0 14px;border:1.5px solid var(--linha);border-radius:12px;background:#fff;font:500 16px 'Plus Jakarta Sans',system-ui,sans-serif;color:var(--texto);outline:none;-webkit-appearance:none;appearance:none}
+.campo:focus{border-color:var(--verde);box-shadow:0 0 0 3px rgba(15,90,70,.15)}
+textarea.campo{height:88px;padding:12px 14px;resize:none}
+.campo.erro{border-color:#c0392b;background:#fff8f7}
+.msg{margin:5px 0 0;font-size:12px;font-weight:600;color:#a12a1c}
+.resumo-erro{padding:10px 12px;border-radius:12px;background:#fde8e6;color:#8a1c12;font-size:13px;font-weight:600;line-height:1.4}
+.botao{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;border:none;border-radius:14px;background:var(--verde);color:#fff;font:800 16px 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer;text-decoration:none;padding:0 18px}
+.botao.claro{background:#fff;color:var(--verde);border:1.5px solid var(--verde);min-height:50px;font-size:15px}
+.nota{text-align:center;font-size:12px;line-height:1.45;color:#5b6e66}
+.indisponivel{display:flex;flex-direction:column;gap:12px;align-items:stretch;text-align:center;padding:24px 18px;background:#fff;border-radius:20px}
+.indisponivel b{font-size:17px;color:var(--verde-esc)}
+.oculto{display:none!important}
+</style>
+</head>
+<body>
+<main class="pagina">
+  <header class="topo">
+    <img src="logo.png" alt="WIL EVENTOS">
+    <div><div class="marca">WIL EVENTOS</div><div class="local">Espaço para eventos · Teresina-PI</div></div>
+  </header>
+
+  <!-- TELA 1: calendário -->
+  <section id="telaCalendario">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div>
+        <h1>Escolha a data do seu evento</h1>
+        <p class="sub">Toque numa data livre para enviar seus dados e solicitar o orçamento pelo WhatsApp.</p>
+      </div>
+
+      <div id="carregando" class="indisponivel"><b>Carregando a agenda…</b></div>
+
+      <div id="indisponivel" class="indisponivel oculto">
+        <b>Agenda em atualização</b>
+        <div class="sub" style="margin:0">Fale com a gente pelo WhatsApp para consultar as datas disponíveis.</div>
+        <a class="botao" id="linkWhatsSimples" href="#" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+      </div>
+
+      <div id="calendario" class="cartao oculto">
+        <div class="nav">
+          <button type="button" class="seta" id="btnAnterior" aria-label="Mês anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+          <div class="mes"><b id="tituloMes"></b><span id="livresMes"></span></div>
+          <button type="button" class="seta" id="btnProximo" aria-label="Próximo mês"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="grade" aria-hidden="true"><div class="semana">D</div><div class="semana">S</div><div class="semana">T</div><div class="semana">Q</div><div class="semana">Q</div><div class="semana">S</div><div class="semana">S</div></div>
+        <div class="grade" id="dias"></div>
+        <div class="legenda">
+          <div><i style="background:#fff;border:1.5px solid #9cc3b2"></i>Livre</div>
+          <div><i style="background:#f8d77e;border:1.5px solid #d9a521"></i>Em negociação</div>
+          <div><i style="background:#3b4744"></i>Reservado</div>
+        </div>
+      </div>
+
+      <div id="avisoNeg" class="aviso oculto">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f5a46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+        <div>Datas <b>em negociação</b> ainda podem ser solicitadas.</div>
+      </div>
+      <div class="rodape" id="atualizado"></div>
+    </div>
+  </section>
+
+  <!-- TELA 2: formulário -->
+  <section id="telaForm" class="oculto">
+    <form id="form" novalidate style="display:flex;flex-direction:column;gap:16px">
+      <button type="button" class="voltar" id="btnVoltar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao calendário</button>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <h1 style="font-size:24px">Solicitar esta data</h1>
+        <div class="pilula" id="dataLonga"></div>
+      </div>
+      <div id="alertaNeg" class="alerta-neg oculto"><b>Esta data está em negociação</b>, mas ainda pode ser solicitada.</div>
+      <p class="sub" style="margin:0">Preencha os dados abaixo. Eles são usados no orçamento e no contrato.</p>
+      <div class="form">
+        <div class="inteiro"><label for="nome">Nome completo *</label><input id="nome" class="campo" type="text" autocomplete="name" maxlength="80"><p class="msg oculto"></p></div>
+        <div><label for="cpf">CPF *</label><input id="cpf" class="campo" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00"><p class="msg oculto"></p></div>
+        <div><label for="telefone">Telefone *</label><input id="telefone" class="campo" type="tel" inputmode="numeric" autocomplete="tel" maxlength="15" placeholder="(86) 90000-0000"><p class="msg oculto"></p></div>
+        <div class="inteiro"><label for="endereco">Endereço *</label><input id="endereco" class="campo" type="text" autocomplete="address-line1" maxlength="100" placeholder="Rua, avenida…"><p class="msg oculto"></p></div>
+        <div><label for="numero">Número *</label><input id="numero" class="campo" type="text" maxlength="8" placeholder="123 ou S/N"><p class="msg oculto"></p></div>
+        <div><label for="cep">CEP *</label><input id="cep" class="campo" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="9" placeholder="64000-000"><p class="msg oculto"></p></div>
+        <div class="inteiro"><label for="bairro">Bairro *</label><input id="bairro" class="campo" type="text" maxlength="60"><p class="msg oculto"></p></div>
+        <div class="inteiro"><label for="tipo">Tipo de evento *</label><input id="tipo" class="campo" type="text" maxlength="60" placeholder="Aniversário, casamento, confraternização…"><p class="msg oculto"></p></div>
+        <div><label for="inicio">Início *</label><input id="inicio" class="campo" type="text" inputmode="numeric" maxlength="5" placeholder="18:00"><p class="msg oculto"></p></div>
+        <div><label for="fim">Término *</label><input id="fim" class="campo" type="text" inputmode="numeric" maxlength="5" placeholder="23:00"><p class="msg oculto"></p></div>
+        <div class="inteiro"><label for="obs">Observações</label><textarea id="obs" class="campo" maxlength="300" placeholder="Algo que devemos saber?"></textarea></div>
+      </div>
+      <div id="resumoErro" class="resumo-erro oculto" role="alert"></div>
+      <button type="submit" class="botao"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>Enviar pelo WhatsApp</button>
+      <div class="nota">Seus dados vão só para o WhatsApp do WIL EVENTOS. A data só fica reservada após a assinatura do contrato.</div>
+    </form>
+  </section>
+
+  <!-- TELA 3: depois de enviar -->
+  <section id="telaEnviado" class="oculto">
+    <div style="display:flex;flex-direction:column;gap:16px;text-align:center;align-items:stretch">
+      <h1 style="font-size:22px">Quase lá!</h1>
+      <p class="sub" style="margin:0">Abrimos o WhatsApp com a sua mensagem. Se não abriu, toque no botão abaixo e depois em <b>enviar</b>.</p>
+      <a class="botao" id="linkWhats" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+      <button type="button" class="botao claro" id="btnNova">Ver o calendário de novo</button>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+  'use strict';
+  var WHATS = '5561992488447';
+  var MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  var SEMANA = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+  var CAMPOS = ['nome','cpf','telefone','endereco','numero','cep','bairro','tipo','inicio','fim','obs'];
+  var ocupacao = {}, mesOffset = 0, dataEscolhida = '', statusEscolhido = 'livre', tentou = false;
+  var $ = function(id){ return document.getElementById(id); };
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+  function iso(y,m,d){ return y+'-'+pad(m+1)+'-'+pad(d); }
+  function br(k){ var p=String(k||'').split('-'); return p.length===3 ? p[2]+'/'+p[1]+'/'+p[0] : ''; }
+  function hojeIso(){ var h=new Date(); return iso(h.getFullYear(),h.getMonth(),h.getDate()); }
+  function linkWhats(texto){ return 'https://wa.me/'+WHATS+'?text='+encodeURIComponent(texto); }
+  function mostrar(id){ ['telaCalendario','telaForm','telaEnviado'].forEach(function(t){ $(t).classList.toggle('oculto', t!==id); }); window.scrollTo(0,0); }
+
+  $('linkWhatsSimples').href = linkWhats('Olá! Quero consultar as datas disponíveis no WIL EVENTOS.');
+
+  // ---------- Agenda (somente data e situação, enviada pelo sistema) ----------
+  fetch('agenda.json?t='+Date.now(), {cache:'no-store'})
+    .then(function(r){ if(!r.ok) throw new Error('sem agenda'); return r.json(); })
+    .then(function(a){
+      if(!a || !a.atualizadoEm || typeof a.datas!=='object') throw new Error('agenda vazia');
+      Object.keys(a.datas).forEach(function(k){
+        var s=String(a.datas[k]);
+        if(/^\d{4}-\d{2}-\d{2}$/.test(k) && (s==='reservado'||s==='negociacao')) ocupacao[k]=s;
+      });
+      var d=new Date(a.atualizadoEm);
+      $('atualizado').textContent = isNaN(d) ? '' : 'Agenda atualizada em '+pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' às '+pad(d.getHours())+':'+pad(d.getMinutes());
+      $('carregando').classList.add('oculto');
+      $('calendario').classList.remove('oculto');
+      $('avisoNeg').classList.remove('oculto');
+      desenhar();
+    })
+    .catch(function(){
+      $('carregando').classList.add('oculto');
+      $('indisponivel').classList.remove('oculto');
+    });
+
+  function desenhar(){
+    var h=new Date(), hoje=hojeIso();
+    var ref=new Date(h.getFullYear(), h.getMonth()+mesOffset, 1);
+    var y=ref.getFullYear(), m=ref.getMonth(), total=new Date(y,m+1,0).getDate();
+    var grade=$('dias'); grade.textContent='';
+    var livres=0, i;
+    for(i=0;i<ref.getDay();i++){ var v=document.createElement('div'); v.style.height='44px'; grade.appendChild(v); }
+    for(var n=1;n<=total;n++){
+      var k=iso(y,m,n), st=ocupacao[k]||'livre', passado=k<hoje;
+      var b=document.createElement('button');
+      b.type='button'; b.textContent=n;
+      b.className='dia '+(passado?'passado':st)+(k===hoje?' hoje':'');
+      b.setAttribute('aria-label', n+' de '+MESES[m].toLowerCase()+', '+(passado?'data passada':st==='reservado'?'reservado':st==='negociacao'?'em negociação':'livre'));
+      if(passado||st==='reservado') b.disabled=true;
+      else { if(st==='livre') livres++; b.addEventListener('click', escolherData.bind(null,k,st)); }
+      grade.appendChild(b);
+    }
+    $('tituloMes').textContent=MESES[m]+' '+y;
+    $('livresMes').textContent= livres===1 ? '1 data livre' : livres+' datas livres';
+    $('btnAnterior').disabled = mesOffset===0;
+    $('btnProximo').disabled = mesOffset===11;
+  }
+  $('btnAnterior').addEventListener('click', function(){ if(mesOffset>0){ mesOffset--; desenhar(); } });
+  $('btnProximo').addEventListener('click', function(){ if(mesOffset<11){ mesOffset++; desenhar(); } });
+
+  function escolherData(k,st){
+    dataEscolhida=k; statusEscolhido=st; tentou=false;
+    var d=new Date(k+'T12:00:00'), s=SEMANA[d.getDay()];
+    $('dataLonga').textContent=s.charAt(0).toUpperCase()+s.slice(1)+', '+d.getDate()+' de '+MESES[d.getMonth()].toLowerCase()+' de '+d.getFullYear();
+    $('alertaNeg').classList.toggle('oculto', st!=='negociacao');
+    mostrarErros({});
+    mostrar('telaForm');
+  }
+  $('btnVoltar').addEventListener('click', function(){ mostrar('telaCalendario'); });
+  $('btnNova').addEventListener('click', function(){ $('form').reset(); dataEscolhida=''; mostrar('telaCalendario'); });
+
+  // ---------- Travas de digitação ----------
+  function digitos(v,max){ return String(v||'').replace(/\D/g,'').slice(0,max); }
+  function texto(v,max,proibido){ return String(v||'').replace(proibido,'').replace(/\s{2,}/g,' ').replace(/^\s+/,'').slice(0,max); }
+  function hora(v){ var d=digitos(v,4); return d.length>2 ? d.slice(0,2)+':'+d.slice(2) : d; }
+  var MASCARA = {
+    nome: function(v){ return texto(v,80,/[^A-Za-zÀ-ÖØ-öø-ÿ' -]/g); },
+    cpf: function(v){ var d=digitos(v,11); return d.replace(/^(\d{3})(\d)/,'$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/\.(\d{3})(\d)/,'.$1-$2'); },
+    telefone: function(v){ var d=digitos(v,11); if(d.length<=2) return d.length?'('+d:''; if(d.length<=6) return '('+d.slice(0,2)+') '+d.slice(2); if(d.length<=10) return '('+d.slice(0,2)+') '+d.slice(2,6)+'-'+d.slice(6); return '('+d.slice(0,2)+') '+d.slice(2,7)+'-'+d.slice(7); },
+    endereco: function(v){ return texto(v,100,/[^0-9A-Za-zÀ-ÖØ-öø-ÿ'.,º°ª\/ -]/g); },
+    numero: function(v){ return String(v||'').toUpperCase().replace(/[^0-9A-Z\/ -]/g,'').slice(0,8); },
+    cep: function(v){ var d=digitos(v,8); return d.length>5 ? d.slice(0,5)+'-'+d.slice(5) : d; },
+    bairro: function(v){ return texto(v,60,/[^0-9A-Za-zÀ-ÖØ-öø-ÿ'. -]/g); },
+    tipo: function(v){ return texto(v,60,/[^0-9A-Za-zÀ-ÖØ-öø-ÿ'.,&\/ -]/g); },
+    inicio: hora, fim: hora,
+    obs: function(v){ return String(v||'').replace(/[<>]/g,'').slice(0,300); }
+  };
+  CAMPOS.forEach(function(c){
+    $(c).addEventListener('input', function(){
+      var el=$(c), novo=MASCARA[c](el.value);
+      if(novo!==el.value) el.value=novo;
+      if(tentou) mostrarErros(validar(ler()));
+    });
+  });
+  function ler(){ var d={}; CAMPOS.forEach(function(c){ d[c]=String($(c).value||'').trim(); }); return d; }
+
+  function cpfValido(c){
+    var d=digitos(c,11); if(d.length!==11||/^(\d)\1{10}$/.test(d)) return false;
+    function dv(t){ var s=0; for(var i=0;i<t;i++) s+=Number(d[i])*(t+1-i); var r=(s*10)%11; return r===10?0:r; }
+    return dv(9)===Number(d[9]) && dv(10)===Number(d[10]);
+  }
+  function horaValida(h){ var m=/^(\d{2}):(\d{2})$/.exec(h||''); return !!m && Number(m[1])<24 && Number(m[2])<60; }
+  function validar(d){
+    var e={};
+    if(!d.nome) e.nome='Informe o nome completo.';
+    else if(d.nome.split(/\s+/).filter(function(p){ return p.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ]/g,'').length>=2; }).length<2) e.nome='Informe nome e sobrenome.';
+    var cpf=digitos(d.cpf,11);
+    if(!cpf) e.cpf='Informe o CPF.'; else if(cpf.length<11) e.cpf='CPF incompleto.'; else if(!cpfValido(cpf)) e.cpf='CPF inválido.';
+    var tel=digitos(d.telefone,11);
+    if(!tel) e.telefone='Informe o telefone.'; else if(tel.length<10) e.telefone='Telefone incompleto.'; else if(tel.length===11&&tel[2]!=='9') e.telefone='Celular deve começar com 9.';
+    if(d.endereco.length<3) e.endereco='Informe o endereço.';
+    if(!d.numero) e.numero='Informe o número (ou S/N).';
+    var cep=digitos(d.cep,8);
+    if(!cep) e.cep='Informe o CEP.'; else if(cep.length<8) e.cep='CEP incompleto.';
+    if(d.bairro.length<2) e.bairro='Informe o bairro.';
+    if(d.tipo.length<3) e.tipo='Informe o tipo de evento.';
+    if(!d.inicio) e.inicio='Informe o horário.'; else if(!horaValida(d.inicio)) e.inicio=d.inicio.length<5?'Horário incompleto.':'Horário inválido.';
+    if(!d.fim) e.fim='Informe o horário.'; else if(!horaValida(d.fim)) e.fim=d.fim.length<5?'Horário incompleto.':'Horário inválido.';
+    else if(horaValida(d.inicio)&&d.inicio===d.fim) e.fim='Término igual ao início.';
+    return e;
+  }
+  function mostrarErros(e){
+    CAMPOS.forEach(function(c){
+      var el=$(c), msg=el.parentNode.querySelector('.msg');
+      el.classList.toggle('erro', !!e[c]);
+      el.setAttribute('aria-invalid', e[c]?'true':'false');
+      if(msg){ msg.textContent=e[c]||''; msg.classList.toggle('oculto', !e[c]); }
+    });
+    var n=Object.keys(e).length;
+    $('resumoErro').textContent = n===1 ? 'Corrija o campo destacado para enviar.' : 'Corrija os '+n+' campos destacados para enviar.';
+    $('resumoErro').classList.toggle('oculto', n===0);
+  }
+
+  // Formato fixo: o sistema WIL EVENTOS lê esta mensagem no botão "Colar solicitação".
+  function mensagem(d){
+    var linhas=[
+      'Olá! Quero solicitar uma data no WIL EVENTOS.',
+      '',
+      '*SOLICITAÇÃO DE EVENTO — WIL EVENTOS*',
+      'Data: '+br(dataEscolhida)+(statusEscolhido==='negociacao'?' (em negociação)':''),
+      'Início: '+d.inicio,
+      'Término: '+d.fim,
+      'Tipo de evento: '+d.tipo,
+      'Nome: '+d.nome,
+      'CPF: '+d.cpf,
+      'Telefone: '+d.telefone,
+      'Endereço: '+d.endereco,
+      'Número: '+d.numero,
+      'Bairro: '+d.bairro,
+      'CEP: '+d.cep
+    ];
+    if(d.obs) linhas.push('Observações: '+d.obs.replace(/\s*\n\s*/g,' '));
+    return linhas.join('\n');
+  }
+  $('form').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    tentou=true;
+    var d=ler(), e=validar(d);
+    mostrarErros(e);
+    if(Object.keys(e).length){ var primeiro=$(Object.keys(e)[0]); if(primeiro) primeiro.focus(); return; }
+    var url=linkWhats(mensagem(d));
+    $('linkWhats').href=url;
+    mostrar('telaEnviado');
+    window.location.href=url;
+  });
+})();
+</script>
+</body>
+</html>
