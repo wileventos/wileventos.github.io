@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Agenda WIL EVENTOS — datas disponíveis</title>
-<meta name="description" content="Consulte as datas disponíveis do espaço WIL EVENTOS em Teresina-PI e solicite seu orçamento pelo WhatsApp.">
+<meta name="description" content="Consulte as datas disponíveis do espaço WIL EVENTOS em Teresina-PI, monte seu horário e solicite seu orçamento pelo WhatsApp.">
 <meta property="og:title" content="Agenda WIL EVENTOS">
-<meta property="og:description" content="Veja as datas disponíveis e solicite seu orçamento pelo WhatsApp.">
+<meta property="og:description" content="Veja as datas disponíveis, monte seu horário e solicite seu orçamento pelo WhatsApp.">
 <meta property="og:image" content="https://wileventos.github.io/logo.png">
 <meta property="og:url" content="https://wileventos.github.io/">
 <meta property="og:type" content="website">
@@ -26,6 +26,7 @@ html,body{margin:0;background:var(--fundo);color:var(--texto);font-family:'Plus 
 .local{font-size:13px;color:var(--suave)}
 h1{margin:0;font-size:26px;line-height:1.15;font-weight:800;color:var(--verde-esc)}
 .sub{margin:6px 0 0;font-size:14px;line-height:1.5;color:var(--suave)}
+.tela{display:flex;flex-direction:column;gap:16px}
 .cartao{display:flex;flex-direction:column;gap:14px;padding:16px 14px 18px;background:#fff;border-radius:20px;box-shadow:0 1px 2px rgba(16,40,32,.06),0 8px 24px rgba(16,40,32,.06)}
 .nav{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .seta{width:44px;height:44px;border-radius:12px;border:1.5px solid #dbe5e0;background:#f7faf8;color:#0f3d30;display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
@@ -35,18 +36,33 @@ h1{margin:0;font-size:26px;line-height:1.15;font-weight:800;color:var(--verde-es
 .semana{text-align:center;font-size:12px;font-weight:700;color:#5b6e66}
 .dia{width:100%;height:44px;border-radius:12px;padding:0;display:flex;align-items:center;justify-content:center;font:700 15px 'Plus Jakarta Sans',system-ui,sans-serif;border:1.5px solid transparent;-webkit-tap-highlight-color:transparent}
 .dia.livre{background:#fff;color:#0f3d30;border-color:#9cc3b2;cursor:pointer}
-.dia.negociacao{background:#f8d77e;color:#4a3300;border-color:#d9a521;cursor:pointer}
 .dia.reservado{background:#3b4744;color:#cfd7d4;border-color:#3b4744;text-decoration:line-through;cursor:not-allowed}
 .dia.passado{background:transparent;color:#8d9b96;cursor:default}
 .dia.hoje{box-shadow:0 0 0 2px var(--verde)}
-.dia:focus-visible,.botao:focus-visible,.seta:focus-visible,.voltar:focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}
+.dia:focus-visible,.botao:focus-visible,.seta:focus-visible,.voltar:focus-visible,.passo:focus-visible,.atalho:focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}
 .legenda{display:flex;flex-wrap:wrap;gap:8px 14px;padding-top:4px;font-size:12px;font-weight:600;color:#33463e}
 .legenda div{display:flex;align-items:center;gap:6px}.legenda i{width:16px;height:16px;border-radius:5px;display:inline-block}
 .aviso{display:flex;gap:10px;padding:12px 14px;border-radius:14px;background:#e6f0eb;font-size:13px;line-height:1.45;color:#23392f}
 .rodape{text-align:center;font-size:12px;color:#5b6e66}
 .voltar{align-self:flex-start;display:flex;align-items:center;gap:6px;height:44px;padding:0 12px 0 6px;border:none;background:transparent;font:700 14px 'Plus Jakarta Sans',system-ui,sans-serif;color:var(--verde);cursor:pointer}
 .pilula{align-self:flex-start;padding:8px 12px;border-radius:10px;background:var(--verde);color:#fff;font-size:14px;font-weight:700}
-.alerta-neg{padding:12px 14px;border-radius:14px;background:#fdf0c8;border:1.5px solid #e6b73c;font-size:13px;line-height:1.45;color:#4a3300}
+.atalhos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.atalho{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:76px;padding:8px 4px;border-radius:14px;cursor:pointer;font-family:inherit;color:var(--texto);background:#fff;border:1.5px solid var(--linha)}
+.atalho[aria-pressed="true"]{background:#eef7f2;border:2px solid var(--verde)}
+.atalho b{font-size:14px}.atalho span{font-size:12px;color:var(--suave)}.atalho strong{font-size:13px;color:#0f3d30}
+.linha-passo{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 0}
+.linha-passo+.linha-passo{border-top:1px solid #edf2ef}
+.linha-passo .rotulo{display:flex;flex-direction:column;gap:2px;min-width:0}
+.linha-passo .rotulo b{font-size:14px}.linha-passo .rotulo span{font-size:12px;color:var(--suave)}
+.controle{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.passo{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--linha);background:#f7faf8;color:#0f3d30;font:800 20px 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer;padding:0}
+.passo:disabled{opacity:.35;cursor:default}
+.controle output{min-width:54px;text-align:center;font-size:17px;font-weight:800}
+.total{display:flex;flex-direction:column;gap:4px;padding:14px;border-radius:16px;background:var(--verde-esc);color:#fff}
+.total small{font-size:12px;line-height:1.45;color:#b9d3c7}
+.total .regra{margin-top:6px;padding:8px 10px;border-radius:10px;background:rgba(255,255,255,.1);font-size:12px;font-weight:700}
+details.explica{font-size:13px;color:#33463e;background:#fff;border-radius:14px;padding:10px 14px}
+details.explica summary{cursor:pointer;font-weight:700;min-height:28px}
 .form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 12px}
 .form .inteiro{grid-column:span 2}
 label{display:block;margin:0 0 6px;font-size:13px;font-weight:600;color:#33463e}
@@ -55,9 +71,11 @@ label{display:block;margin:0 0 6px;font-size:13px;font-weight:600;color:#33463e}
 textarea.campo{height:88px;padding:12px 14px;resize:none}
 .campo.erro{border-color:#c0392b;background:#fff8f7}
 .msg{margin:5px 0 0;font-size:12px;font-weight:600;color:#a12a1c}
+.resumo{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:14px;background:#eef7f2;border:1.5px solid #9cc3b2}
+.resumo b{display:block;font-size:14px;color:var(--verde-esc)}.resumo span{font-size:13px;color:#33463e}
 .resumo-erro{padding:10px 12px;border-radius:12px;background:#fde8e6;color:#8a1c12;font-size:13px;font-weight:600;line-height:1.4}
 .botao{display:flex;align-items:center;justify-content:center;gap:10px;min-height:54px;border:none;border-radius:14px;background:var(--verde);color:#fff;font:800 16px 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer;text-decoration:none;padding:0 18px}
-.botao.claro{background:#fff;color:var(--verde);border:1.5px solid var(--verde);min-height:50px;font-size:15px}
+.botao.claro{background:#fff;color:var(--verde);border:1.5px solid var(--verde);min-height:46px;font-size:14px}
 .nota{text-align:center;font-size:12px;line-height:1.45;color:#5b6e66}
 .indisponivel{display:flex;flex-direction:column;gap:12px;align-items:stretch;text-align:center;padding:24px 18px;background:#fff;border-radius:20px}
 .indisponivel b{font-size:17px;color:var(--verde-esc)}
@@ -71,54 +89,84 @@ textarea.campo{height:88px;padding:12px 14px;resize:none}
     <div><div class="marca">WIL EVENTOS</div><div class="local">Espaço para eventos · Teresina-PI</div></div>
   </header>
 
-  <!-- TELA 1: calendário -->
-  <section id="telaCalendario">
-    <div style="display:flex;flex-direction:column;gap:18px">
-      <div>
-        <h1>Escolha a data do seu evento</h1>
-        <p class="sub">Toque numa data livre para enviar seus dados e solicitar o orçamento pelo WhatsApp.</p>
-      </div>
-
-      <div id="carregando" class="indisponivel"><b>Carregando a agenda…</b></div>
-
-      <div id="indisponivel" class="indisponivel oculto">
-        <b>Agenda em atualização</b>
-        <div class="sub" style="margin:0">Fale com a gente pelo WhatsApp para consultar as datas disponíveis.</div>
-        <a class="botao" id="linkWhatsSimples" href="#" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
-      </div>
-
-      <div id="calendario" class="cartao oculto">
-        <div class="nav">
-          <button type="button" class="seta" id="btnAnterior" aria-label="Mês anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
-          <div class="mes"><b id="tituloMes"></b><span id="livresMes"></span></div>
-          <button type="button" class="seta" id="btnProximo" aria-label="Próximo mês"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
-        </div>
-        <div class="grade" aria-hidden="true"><div class="semana">D</div><div class="semana">S</div><div class="semana">T</div><div class="semana">Q</div><div class="semana">Q</div><div class="semana">S</div><div class="semana">S</div></div>
-        <div class="grade" id="dias"></div>
-        <div class="legenda">
-          <div><i style="background:#fff;border:1.5px solid #9cc3b2"></i>Livre</div>
-          <div><i style="background:#f8d77e;border:1.5px solid #d9a521"></i>Em negociação</div>
-          <div><i style="background:#3b4744"></i>Reservado</div>
-        </div>
-      </div>
-
-      <div id="avisoNeg" class="aviso oculto">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f5a46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
-        <div>Datas <b>em negociação</b> ainda podem ser solicitadas.</div>
-      </div>
-      <div class="rodape" id="atualizado"></div>
+  <!-- 1. CALENDÁRIO -->
+  <section id="telaCalendario" class="tela">
+    <div>
+      <h1>Escolha a data do seu evento</h1>
+      <p class="sub">Toque numa data livre, monte seu horário e envie seus dados pelo WhatsApp.</p>
     </div>
+    <div id="carregando" class="indisponivel"><b>Carregando a agenda…</b></div>
+    <div id="indisponivel" class="indisponivel oculto">
+      <b>Agenda em atualização</b>
+      <div class="sub" style="margin:0">Fale com a gente pelo WhatsApp para consultar as datas disponíveis.</div>
+      <a class="botao" id="linkWhatsSimples" href="#" target="_blank" rel="noopener">Falar pelo WhatsApp</a>
+    </div>
+    <div id="calendario" class="cartao oculto">
+      <div class="nav">
+        <button type="button" class="seta" id="btnAnterior" aria-label="Mês anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+        <div class="mes"><b id="tituloMes"></b><span id="livresMes"></span></div>
+        <button type="button" class="seta" id="btnProximo" aria-label="Próximo mês"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+      </div>
+      <div class="grade" aria-hidden="true"><div class="semana">D</div><div class="semana">S</div><div class="semana">T</div><div class="semana">Q</div><div class="semana">Q</div><div class="semana">S</div><div class="semana">S</div></div>
+      <div class="grade" id="dias"></div>
+      <div class="legenda">
+        <div><i style="background:#fff;border:1.5px solid #9cc3b2"></i>Livre</div>
+        <div><i style="background:#3b4744"></i>Reservado</div>
+      </div>
+    </div>
+    <div class="rodape" id="atualizado"></div>
   </section>
 
-  <!-- TELA 2: formulário -->
-  <section id="telaForm" class="oculto">
-    <form id="form" novalidate style="display:flex;flex-direction:column;gap:16px">
-      <button type="button" class="voltar" id="btnVoltar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao calendário</button>
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <h1 style="font-size:24px">Solicitar esta data</h1>
-        <div class="pilula" id="dataLonga"></div>
+  <!-- 2. MONTE SEU HORÁRIO -->
+  <section id="telaHorario" class="tela oculto">
+    <button type="button" class="voltar" data-ir="telaCalendario"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao calendário</button>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <h1 style="font-size:24px">Monte seu horário</h1>
+      <div class="pilula" data-data-longa></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:13px;font-weight:700;color:#33463e">Horários mais pedidos</span>
+      <div class="atalhos" id="atalhos"></div>
+    </div>
+    <div class="cartao" style="padding:6px 14px;gap:0">
+      <div class="linha-passo">
+        <div class="rotulo"><b>Início</b><span id="subInicio"></span></div>
+        <div class="controle"><button type="button" class="passo" id="iniMenos" aria-label="Início uma hora mais cedo">–</button><output id="iniTxt" aria-live="polite"></output><button type="button" class="passo" id="iniMais" aria-label="Início uma hora mais tarde">+</button></div>
       </div>
-      <div id="alertaNeg" class="alerta-neg oculto"><b>Esta data está em negociação</b>, mas ainda pode ser solicitada.</div>
+      <div class="linha-passo">
+        <div class="rotulo"><b>Término</b><span id="subFim"></span></div>
+        <div class="controle"><button type="button" class="passo" id="fimMenos" aria-label="Término uma hora mais cedo">–</button><output id="fimTxt" aria-live="polite"></output><button type="button" class="passo" id="fimMais" aria-label="Término uma hora mais tarde">+</button></div>
+      </div>
+      <div style="font-size:12px;line-height:1.5;color:var(--suave);padding:2px 0 8px" id="limitesTxt"></div>
+    </div>
+    <div class="total" aria-live="polite">
+      <small>Seu horário</small>
+      <div style="font-size:20px;font-weight:800"><span id="horarioTxt"></span> <span style="font-size:14px;font-weight:600;color:#b9d3c7" id="duracaoTxt"></span></div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:6px"><small style="font-size:13px">Total estimado</small><span style="font-size:24px;font-weight:800" id="totalTxt"></span></div>
+      <small id="contaTxt"></small>
+      <div class="regra oculto" id="regraTxt"></div>
+    </div>
+    <details class="explica"><summary>Como o valor é calculado</summary><div style="line-height:1.6;padding-top:6px" id="explicaTxt"></div></details>
+    <button type="button" class="botao" id="btnContinuar">Continuar</button>
+    <div class="aviso">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#0f5a46" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:0 0 auto;margin-top:1px"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+      <div><b>Montagem incluída:</b> espaço liberado 3h antes do início (<span id="montagemTxt"></span>). Precisa de mais tempo ou de montar na noite anterior? Fale com a gente: dependendo da agenda, liberamos.</div>
+    </div>
+    <div class="nota">Valor estimado. A confirmação vem no orçamento.</div>
+  </section>
+
+  <!-- 3. DADOS -->
+  <section id="telaForm" class="oculto">
+    <form id="form" novalidate class="tela">
+      <button type="button" class="voltar" data-ir="telaHorario"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>Voltar ao horário</button>
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <h1 style="font-size:24px">Seus dados</h1>
+        <div class="pilula" data-data-longa></div>
+      </div>
+      <div class="resumo">
+        <div style="min-width:0"><b id="resumoNome"></b><span id="resumoHorario"></span></div>
+        <button type="button" class="botao claro" data-ir="telaHorario" style="min-height:44px;padding:0 12px;flex:0 0 auto">Alterar</button>
+      </div>
       <p class="sub" style="margin:0">Preencha os dados abaixo. Eles são usados no orçamento e no contrato.</p>
       <div class="form">
         <div class="inteiro"><label for="nome">Nome completo *</label><input id="nome" class="campo" type="text" autocomplete="name" maxlength="80"><p class="msg oculto"></p></div>
@@ -129,196 +177,152 @@ textarea.campo{height:88px;padding:12px 14px;resize:none}
         <div><label for="cep">CEP *</label><input id="cep" class="campo" type="text" inputmode="numeric" autocomplete="postal-code" maxlength="9" placeholder="64000-000"><p class="msg oculto"></p></div>
         <div class="inteiro"><label for="bairro">Bairro *</label><input id="bairro" class="campo" type="text" maxlength="60"><p class="msg oculto"></p></div>
         <div class="inteiro"><label for="tipo">Tipo de evento *</label><input id="tipo" class="campo" type="text" maxlength="60" placeholder="Aniversário, casamento, confraternização…"><p class="msg oculto"></p></div>
-        <div><label for="inicio">Início *</label><input id="inicio" class="campo" type="text" inputmode="numeric" maxlength="5" placeholder="18:00"><p class="msg oculto"></p></div>
-        <div><label for="fim">Término *</label><input id="fim" class="campo" type="text" inputmode="numeric" maxlength="5" placeholder="23:00"><p class="msg oculto"></p></div>
         <div class="inteiro"><label for="obs">Observações</label><textarea id="obs" class="campo" maxlength="300" placeholder="Algo que devemos saber?"></textarea></div>
       </div>
       <div id="resumoErro" class="resumo-erro oculto" role="alert"></div>
       <button type="submit" class="botao"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>Enviar pelo WhatsApp</button>
-      <div class="nota">Seus dados vão só para o WhatsApp do WIL EVENTOS. A data só fica reservada após a assinatura do contrato.</div>
+      <div class="nota">Seus dados vão só para o WhatsApp de reservas do WIL EVENTOS. A data só fica garantida após o pagamento do sinal.</div>
     </form>
   </section>
 
-  <!-- TELA 3: depois de enviar -->
-  <section id="telaEnviado" class="oculto">
-    <div style="display:flex;flex-direction:column;gap:16px;text-align:center;align-items:stretch">
-      <h1 style="font-size:22px">Quase lá!</h1>
-      <p class="sub" style="margin:0">Abrimos o WhatsApp com a sua mensagem. Se não abriu, toque no botão abaixo e depois em <b>enviar</b>.</p>
-      <a class="botao" id="linkWhats" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
-      <button type="button" class="botao claro" id="btnNova">Ver o calendário de novo</button>
-    </div>
+  <!-- 4. ENVIADO -->
+  <section id="telaEnviado" class="tela oculto" style="text-align:center">
+    <h1 style="font-size:22px">Quase lá!</h1>
+    <p class="sub" style="margin:0">Abrimos o WhatsApp com a sua mensagem. Se não abriu, toque no botão abaixo e depois em <b>enviar</b>.</p>
+    <a class="botao" id="linkWhats" href="#" target="_blank" rel="noopener">Abrir WhatsApp</a>
+    <button type="button" class="botao claro" id="btnNova">Ver o calendário de novo</button>
   </section>
 </main>
 
+<script src="precos.js"></script>
+<script src="campos.js"></script>
 <script>
 (function(){
   'use strict';
   var WHATS = '556192488447'; // conta registrada no formato antigo (sem o nono dígito)
-  var MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
-  var SEMANA = ['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
-  var CAMPOS = ['nome','cpf','telefone','endereco','numero','cep','bairro','tipo','inicio','fim','obs'];
-  var ocupacao = {}, mesOffset = 0, dataEscolhida = '', statusEscolhido = 'livre', tentou = false;
-  var $ = function(id){ return document.getElementById(id); };
+  var MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  var SEMANA=['domingo','segunda-feira','terça-feira','quarta-feira','quinta-feira','sexta-feira','sábado'];
+  var CAMPOS=['nome','cpf','telefone','endereco','numero','cep','bairro','tipo','obs'];
+  var P=window.WilPrecos, C=window.WilCampos;
+  var cfg=P.normalizar(null), reservados={}, mesOffset=0, dataEscolhida='', ini=9, fim=19, tentou=false;
+  var $=function(id){return document.getElementById(id);};
+  function pad(n){return String(n).padStart(2,'0');}
+  function iso(y,m,d){return y+'-'+pad(m+1)+'-'+pad(d);}
+  function br(k){var p=String(k||'').split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:'';}
+  function hojeIso(){var h=new Date();return iso(h.getFullYear(),h.getMonth(),h.getDate());}
+  function linkWhats(t){return 'https://wa.me/'+WHATS+'?text='+encodeURIComponent(t);}
+  function mostrar(id){['telaCalendario','telaHorario','telaForm','telaEnviado'].forEach(function(t){$(t).classList.toggle('oculto',t!==id);});window.scrollTo(0,0);}
+  document.querySelectorAll('[data-ir]').forEach(function(b){b.addEventListener('click',function(){mostrar(b.getAttribute('data-ir'));});});
+  $('linkWhatsSimples').href=linkWhats('Olá! Quero consultar as datas disponíveis no WIL EVENTOS.');
 
-  function pad(n){ return String(n).padStart(2,'0'); }
-  function iso(y,m,d){ return y+'-'+pad(m+1)+'-'+pad(d); }
-  function br(k){ var p=String(k||'').split('-'); return p.length===3 ? p[2]+'/'+p[1]+'/'+p[0] : ''; }
-  function hojeIso(){ var h=new Date(); return iso(h.getFullYear(),h.getMonth(),h.getDate()); }
-  function linkWhats(texto){ return 'https://wa.me/'+WHATS+'?text='+encodeURIComponent(texto); }
-  function mostrar(id){ ['telaCalendario','telaForm','telaEnviado'].forEach(function(t){ $(t).classList.toggle('oculto', t!==id); }); window.scrollTo(0,0); }
-
-  $('linkWhatsSimples').href = linkWhats('Olá! Quero consultar as datas disponíveis no WIL EVENTOS.');
-
-  // ---------- Agenda (somente data e situação, enviada pelo sistema) ----------
-  fetch('agenda.json?t='+Date.now(), {cache:'no-store'})
-    .then(function(r){ if(!r.ok) throw new Error('sem agenda'); return r.json(); })
+  // ---------- Agenda: só datas reservadas (pagas/confirmadas) + preços ----------
+  fetch('agenda.json?t='+Date.now(),{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error();return r.json();})
     .then(function(a){
-      if(!a || !a.atualizadoEm || typeof a.datas!=='object') throw new Error('agenda vazia');
-      Object.keys(a.datas).forEach(function(k){
-        var s=String(a.datas[k]);
-        if(/^\d{4}-\d{2}-\d{2}$/.test(k) && (s==='reservado'||s==='negociacao')) ocupacao[k]=s;
-      });
+      if(!a||!a.atualizadoEm||typeof a.datas!=='object')throw new Error();
+      Object.keys(a.datas).forEach(function(k){ if(/^\d{4}-\d{2}-\d{2}$/.test(k)&&a.datas[k]==='reservado') reservados[k]=true; });
+      cfg=P.normalizar(a.precos); ini=cfg.atalhos[0].ini; fim=cfg.atalhos[0].fim;
       var d=new Date(a.atualizadoEm);
-      $('atualizado').textContent = isNaN(d) ? '' : 'Agenda atualizada em '+pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' às '+pad(d.getHours())+':'+pad(d.getMinutes());
-      $('carregando').classList.add('oculto');
-      $('calendario').classList.remove('oculto');
-      $('avisoNeg').classList.remove('oculto');
+      $('atualizado').textContent=isNaN(d)?'':'Agenda atualizada em '+pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()+' às '+pad(d.getHours())+':'+pad(d.getMinutes());
+      $('carregando').classList.add('oculto'); $('calendario').classList.remove('oculto');
       desenhar();
     })
-    .catch(function(){
-      $('carregando').classList.add('oculto');
-      $('indisponivel').classList.remove('oculto');
-    });
+    .catch(function(){ $('carregando').classList.add('oculto'); $('indisponivel').classList.remove('oculto'); });
 
   function desenhar(){
-    var h=new Date(), hoje=hojeIso();
-    var ref=new Date(h.getFullYear(), h.getMonth()+mesOffset, 1);
-    var y=ref.getFullYear(), m=ref.getMonth(), total=new Date(y,m+1,0).getDate();
-    var grade=$('dias'); grade.textContent='';
-    var livres=0, i;
-    for(i=0;i<ref.getDay();i++){ var v=document.createElement('div'); v.style.height='44px'; grade.appendChild(v); }
+    var h=new Date(), hoje=hojeIso(), ref=new Date(h.getFullYear(),h.getMonth()+mesOffset,1);
+    var y=ref.getFullYear(), m=ref.getMonth(), total=new Date(y,m+1,0).getDate(), grade=$('dias'), livres=0;
+    grade.textContent='';
+    for(var i=0;i<ref.getDay();i++){var v=document.createElement('div');v.style.height='44px';grade.appendChild(v);}
     for(var n=1;n<=total;n++){
-      var k=iso(y,m,n), st=ocupacao[k]||'livre', passado=k<hoje;
-      var b=document.createElement('button');
+      var k=iso(y,m,n), res=!!reservados[k], passado=k<hoje, b=document.createElement('button');
       b.type='button'; b.textContent=n;
-      b.className='dia '+(passado?'passado':st)+(k===hoje?' hoje':'');
-      b.setAttribute('aria-label', n+' de '+MESES[m].toLowerCase()+', '+(passado?'data passada':st==='reservado'?'reservado':st==='negociacao'?'em negociação':'livre'));
-      if(passado||st==='reservado') b.disabled=true;
-      else { if(st==='livre') livres++; b.addEventListener('click', escolherData.bind(null,k,st)); }
+      b.className='dia '+(passado?'passado':res?'reservado':'livre')+(k===hoje?' hoje':'');
+      b.setAttribute('aria-label',n+' de '+MESES[m].toLowerCase()+', '+(passado?'data passada':res?'reservado':'livre'));
+      if(passado||res) b.disabled=true; else { livres++; b.addEventListener('click',escolherData.bind(null,k)); }
       grade.appendChild(b);
     }
     $('tituloMes').textContent=MESES[m]+' '+y;
-    $('livresMes').textContent= livres===1 ? '1 data livre' : livres+' datas livres';
-    $('btnAnterior').disabled = mesOffset===0;
-    $('btnProximo').disabled = mesOffset===11;
+    $('livresMes').textContent=livres===1?'1 data livre':livres+' datas livres';
+    $('btnAnterior').disabled=mesOffset===0; $('btnProximo').disabled=mesOffset===11;
   }
-  $('btnAnterior').addEventListener('click', function(){ if(mesOffset>0){ mesOffset--; desenhar(); } });
-  $('btnProximo').addEventListener('click', function(){ if(mesOffset<11){ mesOffset++; desenhar(); } });
+  $('btnAnterior').addEventListener('click',function(){if(mesOffset>0){mesOffset--;desenhar();}});
+  $('btnProximo').addEventListener('click',function(){if(mesOffset<11){mesOffset++;desenhar();}});
 
-  function escolherData(k,st){
-    dataEscolhida=k; statusEscolhido=st; tentou=false;
+  function escolherData(k){
+    dataEscolhida=k; tentou=false;
     var d=new Date(k+'T12:00:00'), s=SEMANA[d.getDay()];
-    $('dataLonga').textContent=s.charAt(0).toUpperCase()+s.slice(1)+', '+d.getDate()+' de '+MESES[d.getMonth()].toLowerCase()+' de '+d.getFullYear();
-    $('alertaNeg').classList.toggle('oculto', st!=='negociacao');
-    mostrarErros({});
-    mostrar('telaForm');
+    var longa=s.charAt(0).toUpperCase()+s.slice(1)+', '+d.getDate()+' de '+MESES[d.getMonth()].toLowerCase()+' de '+d.getFullYear();
+    document.querySelectorAll('[data-data-longa]').forEach(function(e){e.textContent=longa;});
+    if(!cfg.atalhos.some(function(a){return a.ini===ini&&a.fim===fim;})&&(ini<cfg.limiteInicio||fim>cfg.limiteFim)){ini=cfg.atalhos[0].ini;fim=cfg.atalhos[0].fim;}
+    desenharHorario(); mostrarErros({}); mostrar('telaHorario');
   }
-  $('btnVoltar').addEventListener('click', function(){ mostrar('telaCalendario'); });
-  $('btnNova').addEventListener('click', function(){ $('form').reset(); dataEscolhida=''; mostrar('telaCalendario'); });
 
-  // ---------- Travas de digitação ----------
-  function digitos(v,max){ return String(v||'').replace(/\D/g,'').slice(0,max); }
-  function texto(v,max,proibido){ return String(v||'').replace(proibido,'').replace(/\s{2,}/g,' ').replace(/^\s+/,'').slice(0,max); }
-  function hora(v){ var d=digitos(v,4); return d.length>2 ? d.slice(0,2)+':'+d.slice(2) : d; }
-  var MASCARA = {
-    nome: function(v){ return texto(v,80,/[^A-Za-zÀ-ÖØ-öø-ÿ' -]/g); },
-    cpf: function(v){ var d=digitos(v,11); return d.replace(/^(\d{3})(\d)/,'$1.$2').replace(/^(\d{3})\.(\d{3})(\d)/,'$1.$2.$3').replace(/\.(\d{3})(\d)/,'.$1-$2'); },
-    telefone: function(v){ var d=digitos(v,11); if(d.length<=2) return d.length?'('+d:''; if(d.length<=6) return '('+d.slice(0,2)+') '+d.slice(2); if(d.length<=10) return '('+d.slice(0,2)+') '+d.slice(2,6)+'-'+d.slice(6); return '('+d.slice(0,2)+') '+d.slice(2,7)+'-'+d.slice(7); },
-    endereco: function(v){ return texto(v,100,/[^0-9A-Za-zÀ-ÖØ-öø-ÿ'.,º°ª\/ -]/g); },
-    numero: function(v){ return String(v||'').toUpperCase().replace(/[^0-9A-Z\/ -]/g,'').slice(0,8); },
-    cep: function(v){ var d=digitos(v,8); return d.length>5 ? d.slice(0,5)+'-'+d.slice(5) : d; },
-    bairro: function(v){ return texto(v,60,/[^0-9A-Za-zÀ-ÖØ-öø-ÿ'. -]/g); },
-    tipo: function(v){ return texto(v,60,/[^0-9A-Za-zÀ-ÖØ-öø-ÿ'.,&\/ -]/g); },
-    inicio: hora, fim: hora,
-    obs: function(v){ return String(v||'').replace(/[<>]/g,'').slice(0,300); }
-  };
+  // ---------- Monte seu horário ----------
+  function desenharHorario(){
+    var maxIni=cfg.limiteFim-cfg.duracaoMinima, minFim=ini+cfg.duracaoMinima, c=P.calcular(cfg,ini,fim);
+    var box=$('atalhos'); box.textContent='';
+    cfg.atalhos.forEach(function(a){
+      var b=document.createElement('button'); b.type='button'; b.className='atalho';
+      b.setAttribute('aria-pressed',String(a.ini===ini&&a.fim===fim));
+      var t1=document.createElement('b'); t1.textContent=a.nome;
+      var t2=document.createElement('span'); t2.textContent=P.hh(a.ini)+'–'+P.hh(a.fim);
+      var t3=document.createElement('strong'); t3.textContent=P.brl(P.calcular(cfg,a.ini,a.fim).total);
+      b.appendChild(t1); b.appendChild(t2); b.appendChild(t3);
+      b.addEventListener('click',function(){ini=a.ini;fim=a.fim;desenharHorario();});
+      box.appendChild(b);
+    });
+    $('iniTxt').textContent=P.hh(ini); $('fimTxt').textContent=P.hh(fim);
+    $('iniMenos').disabled=ini<=cfg.limiteInicio; $('iniMais').disabled=ini>=maxIni;
+    $('fimMenos').disabled=fim<=minFim; $('fimMais').disabled=fim>=cfg.limiteFim;
+    $('subInicio').textContent=ini<=cfg.limiteInicio?'Mais cedo possível ('+P.hh(cfg.limiteInicio)+')':(ini>=maxIni?'Mais tarde possível ('+P.hh(maxIni)+')':'De '+P.hh(cfg.limiteInicio)+' a '+P.hh(maxIni));
+    $('subFim').textContent=fim<=minFim?'Mínimo de '+cfg.duracaoMinima+' horas de evento':(fim>=cfg.limiteFim?'Mais tarde possível ('+P.hh(cfg.limiteFim)+')':(fim>=24?'Termina no dia seguinte':'Até '+P.hh(cfg.limiteFim)+' do dia seguinte'));
+    $('limitesTxt').textContent='Mínimo de '+cfg.duracaoMinima+' horas · das '+P.hh(cfg.limiteInicio)+' às '+P.hh(cfg.limiteFim);
+    $('horarioTxt').textContent=P.hh(c.ini)+' às '+P.hh(c.fim); $('duracaoTxt').textContent='('+c.horas+' horas)';
+    $('totalTxt').textContent=P.brl(c.total); $('contaTxt').textContent='Soma das horas: '+c.conta+' = '+P.brl(c.soma);
+    $('regraTxt').textContent=c.regra; $('regraTxt').classList.toggle('oculto',!c.regra);
+    $('explicaTxt').textContent='Cada hora tem o valor da sua faixa: '+P.descricaoFaixas(cfg)+'. O valor mínimo é '+P.brl(cfg.valorMinimo)+'. Entre '+P.hh(cfg.janelaInicio)+' e '+P.hh(cfg.janelaFim)+', o máximo é '+P.brl(cfg.tetoDiaInteiro)+' (dia inteiro).';
+    $('montagemTxt').textContent='a partir das '+P.hh(Math.max(6,ini-3));
+    $('resumoNome').textContent=P.nomeAtalho(cfg,ini,fim)||'Horário personalizado';
+    $('resumoHorario').textContent=P.hh(c.ini)+' às '+P.hh(c.fim)+' · Total estimado '+P.brl(c.total);
+  }
+  $('iniMenos').addEventListener('click',function(){ini=Math.max(cfg.limiteInicio,ini-1);desenharHorario();});
+  $('iniMais').addEventListener('click',function(){ini=Math.min(cfg.limiteFim-cfg.duracaoMinima,ini+1);fim=Math.max(fim,ini+cfg.duracaoMinima);desenharHorario();});
+  $('fimMenos').addEventListener('click',function(){fim=Math.max(ini+cfg.duracaoMinima,fim-1);desenharHorario();});
+  $('fimMais').addEventListener('click',function(){fim=Math.min(cfg.limiteFim,fim+1);desenharHorario();});
+  $('btnContinuar').addEventListener('click',function(){mostrar('telaForm');});
+  $('btnNova').addEventListener('click',function(){$('form').reset();dataEscolhida='';mostrar('telaCalendario');});
+
+  // ---------- Dados com travas ----------
   CAMPOS.forEach(function(c){
-    $(c).addEventListener('input', function(){
-      var el=$(c), novo=MASCARA[c](el.value);
-      if(novo!==el.value) el.value=novo;
-      if(tentou) mostrarErros(validar(ler()));
-    });
+    $(c).addEventListener('input',function(){var el=$(c),novo=C.MASCARA[c](el.value);if(novo!==el.value)el.value=novo;if(tentou)mostrarErros(C.validar(ler()));});
   });
-  function ler(){ var d={}; CAMPOS.forEach(function(c){ d[c]=String($(c).value||'').trim(); }); return d; }
-
-  function cpfValido(c){
-    var d=digitos(c,11); if(d.length!==11||/^(\d)\1{10}$/.test(d)) return false;
-    function dv(t){ var s=0; for(var i=0;i<t;i++) s+=Number(d[i])*(t+1-i); var r=(s*10)%11; return r===10?0:r; }
-    return dv(9)===Number(d[9]) && dv(10)===Number(d[10]);
-  }
-  function horaValida(h){ var m=/^(\d{2}):(\d{2})$/.exec(h||''); return !!m && Number(m[1])<24 && Number(m[2])<60; }
-  function validar(d){
-    var e={};
-    if(!d.nome) e.nome='Informe o nome completo.';
-    else if(d.nome.split(/\s+/).filter(function(p){ return p.replace(/[^A-Za-zÀ-ÖØ-öø-ÿ]/g,'').length>=2; }).length<2) e.nome='Informe nome e sobrenome.';
-    var cpf=digitos(d.cpf,11);
-    if(!cpf) e.cpf='Informe o CPF.'; else if(cpf.length<11) e.cpf='CPF incompleto.'; else if(!cpfValido(cpf)) e.cpf='CPF inválido.';
-    var tel=digitos(d.telefone,11);
-    if(!tel) e.telefone='Informe o telefone.'; else if(tel.length<10) e.telefone='Telefone incompleto.'; else if(tel.length===11&&tel[2]!=='9') e.telefone='Celular deve começar com 9.';
-    if(d.endereco.length<3) e.endereco='Informe o endereço.';
-    if(!d.numero) e.numero='Informe o número (ou S/N).';
-    var cep=digitos(d.cep,8);
-    if(!cep) e.cep='Informe o CEP.'; else if(cep.length<8) e.cep='CEP incompleto.';
-    if(d.bairro.length<2) e.bairro='Informe o bairro.';
-    if(d.tipo.length<3) e.tipo='Informe o tipo de evento.';
-    if(!d.inicio) e.inicio='Informe o horário.'; else if(!horaValida(d.inicio)) e.inicio=d.inicio.length<5?'Horário incompleto.':'Horário inválido.';
-    if(!d.fim) e.fim='Informe o horário.'; else if(!horaValida(d.fim)) e.fim=d.fim.length<5?'Horário incompleto.':'Horário inválido.';
-    else if(horaValida(d.inicio)&&d.inicio===d.fim) e.fim='Término igual ao início.';
-    return e;
-  }
+  function ler(){var d={};CAMPOS.forEach(function(c){d[c]=String($(c).value||'').trim();});return d;}
   function mostrarErros(e){
-    CAMPOS.forEach(function(c){
-      var el=$(c), msg=el.parentNode.querySelector('.msg');
-      el.classList.toggle('erro', !!e[c]);
-      el.setAttribute('aria-invalid', e[c]?'true':'false');
-      if(msg){ msg.textContent=e[c]||''; msg.classList.toggle('oculto', !e[c]); }
-    });
+    CAMPOS.forEach(function(c){var el=$(c),msg=el.parentNode.querySelector('.msg');el.classList.toggle('erro',!!e[c]);el.setAttribute('aria-invalid',e[c]?'true':'false');if(msg){msg.textContent=e[c]||'';msg.classList.toggle('oculto',!e[c]);}});
     var n=Object.keys(e).length;
-    $('resumoErro').textContent = n===1 ? 'Corrija o campo destacado para enviar.' : 'Corrija os '+n+' campos destacados para enviar.';
-    $('resumoErro').classList.toggle('oculto', n===0);
+    $('resumoErro').textContent=n===1?'Corrija o campo destacado para enviar.':'Corrija os '+n+' campos destacados para enviar.';
+    $('resumoErro').classList.toggle('oculto',n===0);
   }
-
-  // Formato fixo: o sistema WIL EVENTOS lê esta mensagem no botão "Colar solicitação".
+  // Formato fixo: o sistema WIL EVENTOS e o link de orçamento leem esta mensagem.
   function mensagem(d){
-    var linhas=[
-      'Olá! Quero solicitar uma data no WIL EVENTOS.',
-      '',
-      '*SOLICITAÇÃO DE EVENTO — WIL EVENTOS*',
-      'Data: '+br(dataEscolhida)+(statusEscolhido==='negociacao'?' (em negociação)':''),
-      'Início: '+d.inicio,
-      'Término: '+d.fim,
-      'Tipo de evento: '+d.tipo,
-      'Nome: '+d.nome,
-      'CPF: '+d.cpf,
-      'Telefone: '+d.telefone,
-      'Endereço: '+d.endereco,
-      'Número: '+d.numero,
-      'Bairro: '+d.bairro,
-      'CEP: '+d.cep
-    ];
-    if(d.obs) linhas.push('Observações: '+d.obs.replace(/\s*\n\s*/g,' '));
-    return linhas.join('\n');
+    var c=P.calcular(cfg,ini,fim), nome=P.nomeAtalho(cfg,ini,fim)||'Horário personalizado';
+    var l=['Olá! Quero solicitar uma data no WIL EVENTOS.','','*SOLICITAÇÃO DE EVENTO — WIL EVENTOS*',
+      'Data: '+br(dataEscolhida),
+      'Período: '+nome+' ('+c.horas+' horas)',
+      'Início: '+P.hhmm(c.ini),
+      'Término: '+P.hhmm(c.fim)+(c.fim>=24?' (dia seguinte)':''),
+      'Valor estimado: '+P.brl(c.total),
+      'Tipo de evento: '+d.tipo,'Nome: '+d.nome,'CPF: '+d.cpf,'Telefone: '+d.telefone,
+      'Endereço: '+d.endereco,'Número: '+d.numero,'Bairro: '+d.bairro,'CEP: '+d.cep];
+    if(d.obs) l.push('Observações: '+d.obs.replace(/\s*\n\s*/g,' '));
+    return l.join('\n');
   }
-  $('form').addEventListener('submit', function(ev){
-    ev.preventDefault();
-    tentou=true;
-    var d=ler(), e=validar(d);
-    mostrarErros(e);
-    if(Object.keys(e).length){ var primeiro=$(Object.keys(e)[0]); if(primeiro) primeiro.focus(); return; }
-    var url=linkWhats(mensagem(d));
-    $('linkWhats').href=url;
-    mostrar('telaEnviado');
-    window.location.href=url;
+  $('form').addEventListener('submit',function(ev){
+    ev.preventDefault(); tentou=true;
+    var d=ler(), e=C.validar(d); mostrarErros(e);
+    if(Object.keys(e).length){var p=$(Object.keys(e)[0]);if(p)p.focus();return;}
+    var url=linkWhats(mensagem(d)); $('linkWhats').href=url; mostrar('telaEnviado'); window.location.href=url;
   });
 })();
 </script>

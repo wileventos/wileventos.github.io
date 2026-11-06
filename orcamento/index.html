@@ -1,0 +1,517 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Orçamento — WIL EVENTOS</title>
+<meta name="theme-color" content="#0f5a46">
+<link rel="icon" href="../logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--verde:#0f5a46;--verde-esc:#0f2a21;--texto:#13261f;--suave:#4d6158;--fundo:#f3f6f4;--linha:#cbd8d1}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--fundo);color:var(--texto);font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-text-size-adjust:100%}
+.pagina{max-width:520px;margin:0 auto;padding:16px 14px 150px;display:flex;flex-direction:column;gap:14px}
+.topo{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.topo .marca{display:flex;align-items:center;gap:10px;min-width:0}
+.topo img{width:44px;height:44px;object-fit:contain;border-radius:12px;background:#fff;padding:3px}
+.topo b{display:block;font-size:17px;color:#0f3d30}.topo span{font-size:12px;color:var(--suave)}
+.icone{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--linha);background:#fff;color:#0f3d30;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}
+.cartao{display:flex;flex-direction:column;gap:12px;padding:16px 14px;background:#fff;border-radius:18px;box-shadow:0 1px 2px rgba(16,40,32,.06),0 6px 18px rgba(16,40,32,.05)}
+.cartao h2{margin:0;font-size:16px;font-weight:800;color:var(--verde-esc)}
+.cartao h2 small{font-weight:600;color:var(--suave);font-size:12px}
+label{display:block;margin:0 0 6px;font-size:13px;font-weight:600;color:#33463e}
+.campo{width:100%;height:48px;padding:0 12px;border:1.5px solid var(--linha);border-radius:12px;background:#fff;font:500 16px 'Plus Jakarta Sans',system-ui,sans-serif;color:var(--texto);outline:none;-webkit-appearance:none;appearance:none}
+.campo:focus{border-color:var(--verde);box-shadow:0 0 0 3px rgba(15,90,70,.15)}
+textarea.campo{height:120px;padding:10px 12px;resize:vertical;font-size:14px}
+.campo.erro{border-color:#c0392b;background:#fff8f7}
+.msg{margin:5px 0 0;font-size:12px;font-weight:600;color:#a12a1c}
+.grade2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.grade2 .inteiro{grid-column:span 2}
+.botao{display:flex;align-items:center;justify-content:center;gap:8px;min-height:50px;border:none;border-radius:14px;background:var(--verde);color:#fff;font:800 15px 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer;padding:0 16px;text-decoration:none}
+.botao.claro{background:#fff;color:var(--verde);border:1.5px solid var(--verde)}
+.botao.fantasma{background:transparent;color:var(--verde);min-height:44px}
+.botao:disabled{opacity:.5;cursor:default}
+.linha-botoes{display:flex;gap:8px;flex-wrap:wrap}.linha-botoes>*{flex:1 1 140px}
+.status{padding:10px 12px;border-radius:12px;font-size:13px;font-weight:700;line-height:1.4}
+.status.ok{background:#e6f4ec;color:#0f5a46}.status.erro{background:#fde8e6;color:#8a1c12}.status.info{background:#eef2f0;color:#33463e}
+.atalhos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.atalho{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:70px;padding:6px 4px;border-radius:14px;cursor:pointer;font-family:inherit;color:var(--texto);background:#fff;border:1.5px solid var(--linha)}
+.atalho[aria-pressed="true"]{background:#eef7f2;border:2px solid var(--verde)}
+.atalho b{font-size:13.5px}.atalho span{font-size:12px;color:var(--suave)}
+.linha-passo{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.linha-passo .rotulo b{display:block;font-size:14px}.linha-passo .rotulo span{font-size:12px;color:var(--suave)}
+.controle{display:flex;align-items:center;gap:6px;flex:0 0 auto}
+.passo{width:44px;height:44px;border-radius:12px;border:1.5px solid var(--linha);background:#f7faf8;color:#0f3d30;font:800 20px 'Plus Jakarta Sans',system-ui,sans-serif;cursor:pointer;padding:0}
+.passo:disabled{opacity:.35;cursor:default}
+.controle output{min-width:46px;text-align:center;font-size:16px;font-weight:800}
+.item{display:flex;flex-direction:column;gap:8px;padding:12px;border:1.5px solid var(--linha);border-radius:14px}
+.item.ativo{border-color:var(--verde);background:#f6fbf8}
+.item .topo-item{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.item .topo-item label{display:flex;align-items:center;gap:10px;margin:0;font-size:15px;font-weight:800;color:var(--texto);cursor:pointer;min-height:32px}
+.item input[type=checkbox]{width:22px;height:22px;accent-color:var(--verde)}
+.item .detalhes{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;align-items:end}
+.item .remover{border:none;background:transparent;color:#a12a1c;font:700 13px inherit;cursor:pointer;min-height:44px;padding:0 6px}
+.rodape-fixo{position:fixed;left:0;right:0;bottom:0;z-index:5;background:#fff;border-top:1px solid #dbe5e0;box-shadow:0 -6px 20px rgba(16,40,32,.08);padding:10px 14px calc(10px + env(safe-area-inset-bottom))}
+.rodape-fixo .conteudo{max-width:520px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.rodape-fixo .valor{flex:1;min-width:0}
+.rodape-fixo .valor small{display:block;font-size:12px;color:var(--suave)}
+.rodape-fixo .valor b{font-size:22px;color:var(--verde-esc)}
+.resumo-valores{display:flex;flex-direction:column;gap:6px;padding:14px;border-radius:16px;background:var(--verde-esc);color:#fff}
+.resumo-valores .l{display:flex;justify-content:space-between;gap:10px;font-size:13px;color:#b9d3c7}
+.resumo-valores .t{display:flex;justify-content:space-between;align-items:baseline;margin-top:4px;font-size:14px;font-weight:700}
+.resumo-valores .t span:last-child{font-size:24px;font-weight:800;color:#fff}
+.camada{position:fixed;inset:0;z-index:10;background:rgba(15,42,33,.55);display:flex;align-items:flex-end;justify-content:center;padding:14px}
+.camada .janela{width:100%;max-width:520px;background:#fff;border-radius:20px;padding:18px 16px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:12px;max-height:90vh;overflow:auto}
+.camada h3{margin:0;font-size:18px;color:var(--verde-esc)}
+.oculto{display:none!important}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}
+</style>
+</head>
+<body>
+<main class="pagina">
+  <header class="topo">
+    <div class="marca">
+      <img src="../logo.png" alt="WIL EVENTOS">
+      <div style="min-width:0"><b>Novo orçamento</b><span id="emitente">—</span></div>
+    </div>
+    <button type="button" class="icone" id="btnAjustes" aria-label="Ajustes do orçamento"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+  </header>
+
+  <!-- 1. Colar -->
+  <section class="cartao">
+    <h2>1. Solicitação do cliente</h2>
+    <div class="linha-botoes">
+      <button type="button" class="botao" id="btnColar">Colar mensagem do WhatsApp</button>
+    </div>
+    <textarea id="mensagem" class="campo" placeholder="Ou toque aqui e cole a mensagem que o cliente enviou pela agenda online." spellcheck="false"></textarea>
+    <div id="statusLeitura" class="status info">Cole a mensagem, ou preencha os dados abaixo à mão.</div>
+  </section>
+
+  <!-- 2. Cliente -->
+  <section class="cartao">
+    <h2>2. Cliente</h2>
+    <div class="grade2">
+      <div class="inteiro"><label for="nome">Nome completo *</label><input id="nome" class="campo" type="text" maxlength="80" autocomplete="off"><p class="msg oculto"></p></div>
+      <div><label for="telefone">Telefone *</label><input id="telefone" class="campo" type="tel" inputmode="numeric" maxlength="15" placeholder="(86) 90000-0000"><p class="msg oculto"></p></div>
+      <div><label for="cpf">CPF</label><input id="cpf" class="campo" type="text" inputmode="numeric" maxlength="14" placeholder="000.000.000-00"><p class="msg oculto"></p></div>
+      <div class="inteiro"><label for="endereco">Endereço</label><input id="endereco" class="campo" type="text" maxlength="100"><p class="msg oculto"></p></div>
+      <div><label for="numero">Número</label><input id="numero" class="campo" type="text" maxlength="8" placeholder="123 ou S/N"><p class="msg oculto"></p></div>
+      <div><label for="cep">CEP</label><input id="cep" class="campo" type="text" inputmode="numeric" maxlength="9" placeholder="64000-000"><p class="msg oculto"></p></div>
+      <div class="inteiro"><label for="bairro">Bairro</label><input id="bairro" class="campo" type="text" maxlength="60"><p class="msg oculto"></p></div>
+      <div class="inteiro"><label for="tipo">Tipo de evento</label><input id="tipo" class="campo" type="text" maxlength="60" placeholder="Aniversário, casamento…"><p class="msg oculto"></p></div>
+    </div>
+  </section>
+
+  <!-- 3. Data e horário -->
+  <section class="cartao">
+    <h2>3. Data e horário</h2>
+    <div><label for="data">Data do evento *</label><input id="data" class="campo" type="date"><p class="msg oculto" id="msgData"></p></div>
+    <div class="atalhos" id="atalhos"></div>
+    <div class="linha-passo">
+      <div class="rotulo"><b>Início</b><span id="subInicio"></span></div>
+      <div class="controle"><button type="button" class="passo" id="iniMenos" aria-label="Início uma hora mais cedo">–</button><output id="iniTxt"></output><button type="button" class="passo" id="iniMais" aria-label="Início uma hora mais tarde">+</button></div>
+    </div>
+    <div class="linha-passo">
+      <div class="rotulo"><b>Término</b><span id="subFim"></span></div>
+      <div class="controle"><button type="button" class="passo" id="fimMenos" aria-label="Término uma hora mais cedo">–</button><output id="fimTxt"></output><button type="button" class="passo" id="fimMais" aria-label="Término uma hora mais tarde">+</button></div>
+    </div>
+    <div>
+      <label for="valorLocacao">Valor da locação</label>
+      <div style="display:flex;gap:8px"><input id="valorLocacao" class="campo" type="text" inputmode="decimal"><button type="button" class="botao claro" id="btnRecalcular" style="min-height:48px;flex:0 0 auto">Pela tabela</button></div>
+      <p style="margin:6px 0 0;font-size:12px;color:var(--suave)" id="contaLocacao"></p>
+    </div>
+  </section>
+
+  <!-- 4. Adicionais -->
+  <section class="cartao">
+    <h2>4. Adicionais <small>(valor por dia)</small></h2>
+    <div id="itens" style="display:flex;flex-direction:column;gap:10px"></div>
+    <button type="button" class="botao claro" id="btnOutroItem">+ Outro item</button>
+  </section>
+
+  <!-- 5. Desconto e observações -->
+  <section class="cartao">
+    <h2>5. Desconto e observações</h2>
+    <div><label for="desconto">Desconto (R$)</label><input id="desconto" class="campo" type="text" inputmode="decimal" placeholder="0,00"></div>
+    <div><label for="obs">Observações no orçamento</label><textarea id="obs" class="campo" maxlength="300" style="height:88px" placeholder="Opcional"></textarea></div>
+  </section>
+
+  <section class="resumo-valores" aria-live="polite">
+    <div class="l"><span>Locação</span><span id="rLocacao"></span></div>
+    <div class="l"><span>Adicionais</span><span id="rAdicionais"></span></div>
+    <div class="l"><span>Desconto</span><span id="rDesconto"></span></div>
+    <div class="t"><span>Total</span><span id="rTotal"></span></div>
+    <div class="l" style="margin-top:4px"><span id="rSinal"></span></div>
+  </section>
+
+  <div id="statusAcao" class="status oculto" role="status"></div>
+  <div class="linha-botoes">
+    <button type="button" class="botao claro" id="btnBaixar">Baixar PDF</button>
+    <button type="button" class="botao claro" id="btnCopiar">Copiar resumo para o sistema</button>
+  </div>
+  <button type="button" class="botao fantasma" id="btnNovo">Começar outro orçamento</button>
+  <p style="text-align:center;font-size:12px;line-height:1.45;color:#5b6e66;margin:0">Nada é salvo na internet. Os dados ficam só neste celular enquanto a página está aberta.</p>
+</main>
+
+<div class="rodape-fixo">
+  <div class="conteudo">
+    <div class="valor"><small id="fNumero">Orçamento</small><b id="fTotal">R$ 0,00</b></div>
+    <button type="button" class="botao" id="btnEnviar"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.4 7.4L3 20.5l1.6-5.4A8.4 8.4 0 1 1 21 11.5z"/></svg>Enviar PDF</button>
+  </div>
+</div>
+
+<!-- Primeiro uso / ajustes -->
+<div class="camada oculto" id="camadaAjustes" role="dialog" aria-modal="true" aria-labelledby="tituloAjustes">
+  <div class="janela">
+    <h3 id="tituloAjustes">Quem está usando este celular?</h3>
+    <p style="margin:0;font-size:14px;color:var(--suave);line-height:1.5">Cada pessoa tem a sua numeração de orçamentos, para os números nunca se repetirem.</p>
+    <div class="linha-botoes">
+      <button type="button" class="botao claro" data-serie="S">Sou a Wil</button>
+      <button type="button" class="botao claro" data-serie="W">Sou o Weligton</button>
+    </div>
+    <div id="ajusteNumero" class="oculto">
+      <label for="proximoNumero">Próximo número desta série</label>
+      <input id="proximoNumero" class="campo" type="number" inputmode="numeric" min="1" max="9999">
+      <p style="margin:6px 0 0;font-size:12px;color:var(--suave)">Mude só se trocar de celular, para continuar de onde parou.</p>
+    </div>
+    <button type="button" class="botao" id="btnFecharAjustes">Pronto</button>
+  </div>
+</div>
+
+<script src="../precos.js"></script>
+<script src="../campos.js"></script>
+<script src="../vendor/jspdf.umd.min.js"></script>
+<script>
+(function(){
+  'use strict';
+  var P=window.WilPrecos, C=window.WilCampos;
+  var EMPRESA={nome:'WIL EVENTOS',local:'Espaço para eventos · Teresina-PI',contato:'(61) 9 9248-8447',titular:'Wilstefania de Oliveira Santos',
+    pix:'wilstefaniaoliveira@gmail.com',banco:'Nubank',validadeDias:30};
+  var ITENS_PADRAO=[{desc:'Pula-pula'},{desc:'Cama elástica'},{desc:'Freezer extra'}];
+  var CLIENTE=['nome','telefone','cpf','endereco','numero','cep','bairro','tipo'];
+  var OPCIONAIS=['cpf','endereco','numero','cep','bairro','tipo'];
+  var MESES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  var SEMANA=['Domingo','Segunda-feira','Terça-feira','Quarta-feira','Quinta-feira','Sexta-feira','Sábado'];
+  var cfg=P.normalizar(null), ini=9, fim=19, locacaoManual=false, itens=[], numeroAtual='', tentou=false, logoDataUrl=null;
+  var $=function(id){return document.getElementById(id);};
+  function pad(n){return String(n).padStart(2,'0');}
+
+  // ---------- armazenamento local (só neste celular) ----------
+  function lerLocal(k,p){try{var v=localStorage.getItem(k);return v===null?p:JSON.parse(v);}catch(e){return p;}}
+  function gravarLocal(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch(e){return false;}}
+  function serie(){return lerLocal('wilOrc.serie','');}
+  function chaveSeq(){return 'wilOrc.seq.'+serie()+'.'+new Date().getFullYear();}
+  function proximoNumero(){return Number(lerLocal(chaveSeq(),1))||1;}
+  function formatarNumero(n){return new Date().getFullYear()+'-'+serie()+'-'+String(n).padStart(4,'0');}
+  function atualizarEmitente(){
+    var s=serie();
+    $('emitente').textContent=s?('Emitindo como '+(s==='S'?'Wil':'Weligton')+(numeroAtual?' · nº '+numeroAtual:' · próximo nº '+formatarNumero(proximoNumero()))):'Escolha quem está emitindo';
+    $('fNumero').textContent=numeroAtual?'Orçamento nº '+numeroAtual:'Total do orçamento';
+  }
+  function abrirAjustes(){
+    $('camadaAjustes').classList.remove('oculto');
+    var s=serie();
+    document.querySelectorAll('[data-serie]').forEach(function(b){b.setAttribute('aria-pressed',String(b.getAttribute('data-serie')===s));b.className='botao '+(b.getAttribute('data-serie')===s?'':'claro');});
+    $('ajusteNumero').classList.toggle('oculto',!s);
+    if(s) $('proximoNumero').value=proximoNumero();
+    $('btnFecharAjustes').disabled=!s;
+  }
+  document.querySelectorAll('[data-serie]').forEach(function(b){b.addEventListener('click',function(){gravarLocal('wilOrc.serie',b.getAttribute('data-serie'));abrirAjustes();atualizarEmitente();});});
+  $('proximoNumero').addEventListener('change',function(){var n=Math.max(1,Math.min(9999,parseInt(this.value,10)||1));gravarLocal(chaveSeq(),n);this.value=n;atualizarEmitente();});
+  $('btnFecharAjustes').addEventListener('click',function(){if(serie())$('camadaAjustes').classList.add('oculto');});
+  $('btnAjustes').addEventListener('click',abrirAjustes);
+
+  // ---------- dinheiro ----------
+  function brl(v){return P.brl(v);}
+  function campoDinheiro(el,aoMudar){
+    el.addEventListener('input',function(){el.value=el.value.replace(/[^\d,.]/g,'').slice(0,12);aoMudar&&aoMudar();});
+    el.addEventListener('blur',function(){if(el.value.trim()!==''){el.value=C.numero(el.value).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}aoMudar&&aoMudar();});
+  }
+  function fmtCampo(v){return Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});}
+
+  // ---------- preços publicados pelo sistema ----------
+  fetch('../agenda.json?t='+Date.now(),{cache:'no-store'}).then(function(r){return r.ok?r.json():null;}).then(function(a){if(a&&a.precos){cfg=P.normalizar(a.precos);if(!$('mensagem').value.trim()){ini=cfg.atalhos[0].ini;fim=cfg.atalhos[0].fim;}desenharHorario();}}).catch(function(){});
+  fetch('../logo.png').then(function(r){return r.ok?r.blob():null;}).then(function(b){if(!b)return;var fr=new FileReader();fr.onload=function(){logoDataUrl=fr.result;};fr.readAsDataURL(b);}).catch(function(){});
+
+  // ---------- 1. ler a mensagem ----------
+  function lerMensagemColada(){
+    var txt=$('mensagem').value, st=$('statusLeitura');
+    if(!txt.trim()){st.className='status info';st.textContent='Cole a mensagem, ou preencha os dados abaixo à mão.';return;}
+    var m=C.lerMensagem(txt);
+    if(!m.reconhecida){st.className='status erro';st.textContent='Não reconheci uma solicitação da agenda nesta mensagem. Copie a mensagem inteira do cliente.';return;}
+    CLIENTE.forEach(function(k){if(m[k]!==undefined)$(k).value=C.MASCARA[k](m[k]);});
+    if(m.obs) $('obs').value=C.MASCARA.obs(m.obs);
+    if(m.dataISO) $('data').value=m.dataISO;
+    var hi=C.horaParaNumero(m.inicio), hf=C.horaParaNumero(m.fim,hi);
+    if(isFinite(hi)&&isFinite(hf)&&hf>hi){ini=hi;fim=hf;}
+    locacaoManual=false;
+    if(m.adicionais&&m.adicionais.length){m.adicionais.forEach(function(a){var it=itens.find(function(x){return x.desc.toLowerCase()===a.desc.toLowerCase();});if(!it){it={desc:a.desc,extra:true};itens.push(it);}it.ativo=true;it.qtd=a.qtd;it.valor=a.valor;});desenharItens();}
+    if(m.desconto) $('desconto').value=fmtCampo(C.numero(m.desconto));
+    desenharHorario();
+    var e=C.validar(lerCliente(),OPCIONAIS);
+    st.className='status '+(Object.keys(e).length?'erro':'ok');
+    st.textContent=Object.keys(e).length?'Mensagem lida, mas há dados para corrigir (marcados em vermelho).':'Dados conferidos: '+$('nome').value+' · '+dataCurta()+' · '+P.hh(ini)+' às '+P.hh(fim);
+    tentou=true; mostrarErros(e);
+  }
+  $('mensagem').addEventListener('input',lerMensagemColada);
+  $('btnColar').addEventListener('click',function(){
+    if(navigator.clipboard&&navigator.clipboard.readText){
+      navigator.clipboard.readText().then(function(t){$('mensagem').value=t;lerMensagemColada();}).catch(function(){$('mensagem').focus();$('statusLeitura').className='status info';$('statusLeitura').textContent='Toque e segure no campo abaixo e escolha "Colar".';});
+    }else{$('mensagem').focus();}
+  });
+
+  // ---------- 2. cliente ----------
+  CLIENTE.concat(['obs']).forEach(function(k){$(k).addEventListener('input',function(){var el=$(k),n=C.MASCARA[k](el.value);if(n!==el.value)el.value=n;if(tentou)mostrarErros(C.validar(lerCliente(),OPCIONAIS));});});
+  function lerCliente(){var d={};CLIENTE.forEach(function(k){d[k]=String($(k).value||'').trim();});return d;}
+  function mostrarErros(e){CLIENTE.forEach(function(k){var el=$(k),m=el.parentNode.querySelector('.msg');el.classList.toggle('erro',!!e[k]);if(m){m.textContent=e[k]||'';m.classList.toggle('oculto',!e[k]);}});}
+
+  // ---------- 3. data e horário ----------
+  function dataCurta(){var v=$('data').value;if(!v)return'';var p=v.split('-');return p[2]+'/'+p[1]+'/'+p[0];}
+  function dataLonga(iso){var d=new Date(iso+'T12:00:00');return SEMANA[d.getDay()]+', '+d.getDate()+' de '+MESES[d.getMonth()]+' de '+d.getFullYear();}
+  function desenharHorario(){
+    ini=Math.max(cfg.limiteInicio,Math.min(cfg.limiteFim-cfg.duracaoMinima,ini));fim=Math.max(ini+cfg.duracaoMinima,Math.min(cfg.limiteFim,fim));
+    var box=$('atalhos');box.textContent='';
+    cfg.atalhos.forEach(function(a){var b=document.createElement('button');b.type='button';b.className='atalho';b.setAttribute('aria-pressed',String(a.ini===ini&&a.fim===fim));
+      var t1=document.createElement('b');t1.textContent=a.nome;var t2=document.createElement('span');t2.textContent=P.hh(a.ini)+'–'+P.hh(a.fim);b.appendChild(t1);b.appendChild(t2);
+      b.addEventListener('click',function(){ini=a.ini;fim=a.fim;locacaoManual=false;desenharHorario();});box.appendChild(b);});
+    var maxIni=cfg.limiteFim-cfg.duracaoMinima;
+    $('iniTxt').textContent=P.hh(ini);$('fimTxt').textContent=P.hh(fim);
+    $('iniMenos').disabled=ini<=cfg.limiteInicio;$('iniMais').disabled=ini>=maxIni;$('fimMenos').disabled=fim<=ini+cfg.duracaoMinima;$('fimMais').disabled=fim>=cfg.limiteFim;
+    $('subInicio').textContent='De '+P.hh(cfg.limiteInicio)+' a '+P.hh(maxIni);
+    $('subFim').textContent=(fim-ini)+' horas'+(fim>=24?' · termina no dia seguinte':'');
+    var c=P.calcular(cfg,ini,fim);
+    if(!locacaoManual) $('valorLocacao').value=fmtCampo(c.total);
+    $('contaLocacao').textContent=locacaoManual?'Valor digitado à mão. Toque em "Pela tabela" para recalcular ('+brl(c.total)+').':'Pela tabela: '+c.conta+(c.regra?' · '+c.regra:'');
+    atualizarTotais();
+  }
+  function mexer(fn){return function(){fn();locacaoManual=false;desenharHorario();};}
+  $('iniMenos').addEventListener('click',mexer(function(){ini--;}));
+  $('iniMais').addEventListener('click',mexer(function(){ini++;fim=Math.max(fim,ini+cfg.duracaoMinima);}));
+  $('fimMenos').addEventListener('click',mexer(function(){fim--;}));
+  $('fimMais').addEventListener('click',mexer(function(){fim++;}));
+  campoDinheiro($('valorLocacao'),function(){locacaoManual=true;$('contaLocacao').textContent='Valor digitado à mão. Toque em "Pela tabela" para recalcular.';atualizarTotais();});
+  $('btnRecalcular').addEventListener('click',function(){locacaoManual=false;desenharHorario();});
+  $('data').addEventListener('change',function(){$('msgData').classList.add('oculto');$('data').classList.remove('erro');});
+
+  // ---------- 4. adicionais ----------
+  var ultimos=lerLocal('wilOrc.valores',{});
+  itens=ITENS_PADRAO.map(function(i){return{desc:i.desc,ativo:false,qtd:1,valor:Number(ultimos[i.desc]||0)};});
+  function desenharItens(){
+    var box=$('itens');box.textContent='';
+    itens.forEach(function(it,idx){
+      var d=document.createElement('div');d.className='item'+(it.ativo?' ativo':'');
+      var topo=document.createElement('div');topo.className='topo-item';
+      var lab=document.createElement('label');var cb=document.createElement('input');cb.type='checkbox';cb.checked=!!it.ativo;
+      cb.addEventListener('change',function(){it.ativo=cb.checked;desenharItens();});
+      lab.appendChild(cb);
+      if(it.extra){var nome=document.createElement('input');nome.className='campo';nome.value=it.desc;nome.placeholder='Nome do item';nome.style.height='40px';nome.setAttribute('aria-label','Nome do item');nome.addEventListener('input',function(){nome.value=C.MASCARA.item(nome.value);it.desc=nome.value;atualizarTotais();});lab.appendChild(nome);}
+      else lab.appendChild(document.createTextNode(it.desc));
+      topo.appendChild(lab);
+      if(it.extra){var rm=document.createElement('button');rm.type='button';rm.className='remover';rm.textContent='Remover';rm.addEventListener('click',function(){itens.splice(idx,1);desenharItens();});topo.appendChild(rm);}
+      d.appendChild(topo);
+      if(it.ativo){
+        var det=document.createElement('div');det.className='detalhes';
+        var q=document.createElement('div');q.className='controle';
+        var menos=document.createElement('button');menos.type='button';menos.className='passo';menos.textContent='–';menos.setAttribute('aria-label','Menos uma unidade de '+it.desc);menos.disabled=it.qtd<=1;
+        var out=document.createElement('output');out.textContent=it.qtd+'×';
+        var mais=document.createElement('button');mais.type='button';mais.className='passo';mais.textContent='+';mais.setAttribute('aria-label','Mais uma unidade de '+it.desc);mais.disabled=it.qtd>=20;
+        menos.addEventListener('click',function(){it.qtd=Math.max(1,it.qtd-1);desenharItens();});
+        mais.addEventListener('click',function(){it.qtd=Math.min(20,it.qtd+1);desenharItens();});
+        q.appendChild(menos);q.appendChild(out);q.appendChild(mais);
+        var v=document.createElement('div');var lv=document.createElement('label');lv.textContent='Valor do dia (R$)';lv.style.marginBottom='4px';
+        var iv=document.createElement('input');iv.className='campo';iv.type='text';iv.inputMode='decimal';iv.value=it.valor?fmtCampo(it.valor):'';iv.placeholder='0,00';iv.setAttribute('aria-label','Valor do dia de '+it.desc);
+        campoDinheiro(iv,function(){it.valor=C.numero(iv.value);if(!it.extra&&it.valor){ultimos[it.desc]=it.valor;gravarLocal('wilOrc.valores',ultimos);}atualizarTotais();});
+        v.appendChild(lv);v.appendChild(iv);det.appendChild(q);det.appendChild(v);d.appendChild(det);
+      }
+      box.appendChild(d);
+    });
+    atualizarTotais();
+  }
+  $('btnOutroItem').addEventListener('click',function(){itens.push({desc:'',extra:true,ativo:true,qtd:1,valor:0});desenharItens();var c=$('itens').querySelectorAll('.item');var ult=c[c.length-1];if(ult){var n=ult.querySelector('input.campo');if(n)n.focus();}});
+
+  // ---------- totais ----------
+  campoDinheiro($('desconto'),function(){atualizarTotais();});
+  function itensAtivos(){return itens.filter(function(i){return i.ativo&&i.desc.trim();});}
+  function calcularTotais(){
+    var loc=C.numero($('valorLocacao').value), ad=itensAtivos().reduce(function(s,i){return s+i.qtd*i.valor;},0), desc=Math.min(C.numero($('desconto').value),loc+ad);
+    var total=Math.round((loc+ad-desc)*100)/100, sinal=Math.round(total*50)/100;
+    return{loc:loc,ad:ad,desc:desc,total:total,sinal:sinal,restante:Math.round((total-sinal)*100)/100};
+  }
+  function diaUtilAnterior(iso){var d=new Date(iso+'T12:00:00');do{d.setDate(d.getDate()-1);}while(d.getDay()===0||d.getDay()===6);return pad(d.getDate())+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear();}
+  function atualizarTotais(){
+    var t=calcularTotais();
+    $('rLocacao').textContent=brl(t.loc);$('rAdicionais').textContent=brl(t.ad);$('rDesconto').textContent=t.desc?'– '+brl(t.desc):brl(0);
+    $('rTotal').textContent=brl(t.total);$('fTotal').textContent=brl(t.total);
+    $('rSinal').textContent='Sinal 50%: '+brl(t.sinal)+' · Restante: '+brl(t.restante)+($('data').value?' até 12h de '+diaUtilAnterior($('data').value):'');
+  }
+  $('data').addEventListener('change',atualizarTotais);
+
+  // ---------- validação geral ----------
+  function prontoParaEnviar(){
+    tentou=true;
+    var e=C.validar(lerCliente(),OPCIONAIS);mostrarErros(e);
+    var ok=!Object.keys(e).length;
+    if(!$('data').value){$('msgData').textContent='Escolha a data do evento.';$('msgData').classList.remove('oculto');$('data').classList.add('erro');ok=false;}
+    if(calcularTotais().total<=0){ok=false;}
+    if(!serie()){abrirAjustes();return false;}
+    if(!ok){avisar('erro','Confira os campos marcados em vermelho.');var p=document.querySelector('.campo.erro');if(p)p.focus();}
+    return ok;
+  }
+  function avisar(tipo,txt){var s=$('statusAcao');s.className='status '+tipo;s.textContent=txt;}
+  function garantirNumero(){
+    if(numeroAtual) return numeroAtual;
+    var n=proximoNumero();numeroAtual=formatarNumero(n);
+    if(!gravarLocal(chaveSeq(),n+1)) avisar('info','Atenção: este navegador não guarda a numeração. Confira o próximo número em Ajustes.');
+    atualizarEmitente();return numeroAtual;
+  }
+
+  // ---------- PDF ----------
+  function gerarPdf(){
+    var J=window.jspdf&&window.jspdf.jsPDF; if(!J) throw new Error('Gerador de PDF não carregou. Verifique a internet e recarregue a página.');
+    var doc=new J({unit:'mm',format:'a4'}), W=210, M=16, X2=W-M, y;
+    var VERDE=[15,90,70], ESC=[15,42,33], CINZA=[77,97,88], LINHA=[219,229,224], CLARO=[243,248,245];
+    var d=lerCliente(), t=calcularTotais(), c=P.calcular(cfg,ini,fim), hoje=new Date(), val=new Date(hoje.getTime()+EMPRESA.validadeDias*86400000);
+    var dh=function(x){return pad(x.getDate())+'/'+pad(x.getMonth()+1)+'/'+x.getFullYear();};
+    var cor=function(a){doc.setTextColor(a[0],a[1],a[2]);}, fundo=function(a){doc.setFillColor(a[0],a[1],a[2]);}, traco=function(a){doc.setDrawColor(a[0],a[1],a[2]);};
+    var fonte=function(tam,neg){doc.setFont('helvetica',neg?'bold':'normal');doc.setFontSize(tam);};
+    function rodape(pag){traco(LINHA);doc.setLineWidth(.3);doc.line(M,284,X2,284);fonte(8);cor(CINZA);doc.text('Orçamento válido por '+EMPRESA.validadeDias+' dias, sujeito à disponibilidade da data.',M,289);doc.text('Página '+pag+' de 2',X2,289,{align:'right'});}
+    function caixa(x,yy,w,h,f){if(f){fundo(f);}traco(LINHA);doc.setLineWidth(.3);doc.roundedRect(x,yy,w,h,2.5,2.5,f?'FD':'S');}
+    function rotVal(rot,val,x,yy,w){fonte(7,true);cor(CINZA);doc.text(rot.toUpperCase(),x,yy);fonte(10,true);cor(ESC);var l=doc.splitTextToSize(val||'—',w);doc.text(l,x,yy+4.6);return l.length;}
+
+    // Página 1 — cabeçalho
+    if(logoDataUrl){try{doc.addImage(logoDataUrl,'PNG',M,12,26,26);}catch(e){}}
+    fonte(15,true);cor(ESC);doc.text(EMPRESA.nome,M+30,21);
+    fonte(9);cor(CINZA);doc.text(EMPRESA.local,M+30,26.5);doc.text('Reservas: '+EMPRESA.contato,M+30,31.5);
+    fonte(20,true);cor(ESC);doc.text('ORÇAMENTO',X2,21,{align:'right'});
+    fonte(10.5,true);var nTxt='Nº '+numeroAtual,nw=doc.getTextWidth(nTxt)+6;fundo([238,247,242]);doc.roundedRect(X2-nw,24,nw,7,1.5,1.5,'F');cor(VERDE);doc.text(nTxt,X2-3,29,{align:'right'});
+    fonte(8.5);cor(CINZA);doc.text('Emitido em '+dh(hoje)+' · Válido até '+dh(val),X2,36,{align:'right'});
+    traco(VERDE);doc.setLineWidth(1);doc.line(M,42,X2,42);
+
+    // Cliente e evento
+    y=48;var wc=(X2-M-6)/2;caixa(M,y,wc,46);caixa(M+wc+6,y,wc,46);
+    fonte(9.5,true);cor(VERDE);doc.text('CLIENTE',M+4,y+6);doc.text('EVENTO',M+wc+10,y+6);
+    rotVal('Nome',d.nome,M+4,y+12,wc-8);
+    rotVal('CPF',d.cpf,M+4,y+23,wc/2-6);rotVal('Telefone',d.telefone,M+wc/2,y+23,wc/2-4);
+    var end=[d.endereco&&(d.endereco+(d.numero?', '+d.numero:'')),d.bairro,d.cep].filter(Boolean).join(' · ');
+    rotVal('Endereço',end,M+4,y+34,wc-8);
+    var x2=M+wc+10;
+    rotVal('Data',dataLonga($('data').value),x2,y+12,wc-8);
+    rotVal('Horário',P.hh(c.ini)+' às '+P.hh(c.fim)+' ('+c.horas+' horas)',x2,y+23,wc/2-4);rotVal('Tipo',d.tipo,x2+wc/2-4,y+23,wc/2-4);
+    rotVal('Montagem','Espaço liberado a partir das '+P.hh(Math.max(6,ini-3)),x2,y+34,wc-8);
+
+    // Itens
+    y=100;var cQ=X2-62,cV=X2-32;
+    fundo(VERDE);doc.rect(M,y,X2-M,8,'F');fonte(7.5,true);doc.setTextColor(255,255,255);
+    doc.text('DESCRIÇÃO',M+3,y+5.3);doc.text('QTD',cQ,y+5.3,{align:'right'});doc.text('VALOR',cV,y+5.3,{align:'right'});doc.text('TOTAL',X2-3,y+5.3,{align:'right'});
+    y+=8;
+    function linhaItem(desc,sub,qtd,valor,total,cinza){
+      var ls=sub?doc.splitTextToSize(sub,cQ-M-20):[];var h=7+(ls.length*3.8)+(sub?1:0);
+      fonte(10,true);cor(cinza?CINZA:ESC);doc.text(desc,M+3,y+5.5);
+      if(ls.length){fonte(8);cor(CINZA);doc.text(ls,M+3,y+9.6);}
+      fonte(10,!!cinza);cor(cinza?CINZA:ESC);if(qtd!=='')doc.text(String(qtd),cQ,y+5.5,{align:'right'});if(valor!=='')doc.text(valor,cV,y+5.5,{align:'right'});doc.text(total,X2-3,y+5.5,{align:'right'});
+      y+=h;traco(LINHA);doc.setLineWidth(.3);doc.line(M,y,X2,y);
+    }
+    linhaItem('Locação do espaço',dataCurta()+' · '+P.hh(c.ini)+' às '+P.hh(c.fim)+(locacaoManual?'':' · '+c.conta),1,brl(t.loc),brl(t.loc));
+    itensAtivos().forEach(function(i){linhaItem(i.desc,'Diária',i.qtd,brl(i.valor),brl(i.qtd*i.valor));});
+    if(t.desc>0) linhaItem('Desconto','','','','– '+brl(t.desc),true);
+
+    // Total
+    y+=5;fonte(22,true);var tw=doc.getTextWidth(brl(t.total));var bw=tw+30;fundo(ESC);doc.roundedRect(X2-bw,y,bw,14,2.5,2.5,'F');
+    fonte(8.5,true);doc.setTextColor(185,211,199);doc.text('TOTAL',X2-bw+5,y+8.8);fonte(18,true);doc.setTextColor(255,255,255);doc.text(brl(t.total),X2-4,y+9.6,{align:'right'});
+    y+=21;
+
+    // Pagamento
+    var hp=56;caixa(M,y,X2-M,hp,CLARO);
+    fonte(9.5,true);cor(VERDE);doc.text('CONDIÇÕES DE PAGAMENTO',M+4,y+7);
+    var wb=(X2-M-12)/2;
+    caixa(M+4,y+10,wb,15,[255,255,255]);caixa(M+8+wb,y+10,wb,15,[255,255,255]);
+    fonte(7,true);cor(CINZA);doc.text('SINAL (50%) · PARA RESERVAR',M+7,y+15);doc.text('RESTANTE · ATÉ 12H DE '+diaUtilAnterior($('data').value),M+11+wb,y+15);
+    fonte(14,true);cor(ESC);doc.text(brl(t.sinal),M+7,y+22);doc.text(brl(t.restante),M+11+wb,y+22);
+    caixa(M+4,y+28,X2-M-8,12,[255,255,255]);fundo(VERDE);doc.roundedRect(M+7,y+31,12,6,1.2,1.2,'F');fonte(8,true);doc.setTextColor(255,255,255);doc.text('PIX',M+13,y+35.2,{align:'center'});
+    fonte(9.5,true);cor(ESC);doc.text('Chave (e-mail): '+EMPRESA.pix,M+22,y+33.5);fonte(8);cor(CINZA);doc.text(EMPRESA.titular+' · '+EMPRESA.banco,M+22,y+37.6);
+    fundo([255,244,224]);traco([240,198,116]);doc.roundedRect(M+4,y+43,X2-M-8,10,2,2,'FD');fonte(8.5);cor([74,51,0]);
+    doc.text(doc.splitTextToSize('Importante: a data só fica garantida após a confirmação do pagamento do sinal. Até lá, ela pode ser reservada por outro cliente. Se o restante não for pago no prazo, a reserva é cancelada.',X2-M-14),M+7,y+47.2);
+    y+=hp+6;
+    var obs=String($('obs').value||'').trim();
+    if(obs&&y<268){fonte(9.5,true);cor(VERDE);doc.text('OBSERVAÇÕES',M,y);fonte(9.5);cor(ESC);doc.text(doc.splitTextToSize(obs,X2-M).slice(0,Math.floor((280-y)/4.5)),M,y+5);}
+    rodape(1);
+
+    // Página 2
+    doc.addPage();
+    if(logoDataUrl){try{doc.addImage(logoDataUrl,'PNG',M,12,12,12);}catch(e){}}
+    fonte(12,true);cor(ESC);doc.text(EMPRESA.nome,M+15,20);
+    fonte(9,true);cor(CINZA);doc.text('Orçamento Nº '+numeroAtual+' · '+d.nome+' · '+dataCurta(),X2,20,{align:'right'});
+    traco(VERDE);doc.setLineWidth(1);doc.line(M,27,X2,27);
+    y=33;
+    function bloco(x,yy,w,titulo,linhas,extra){
+      var corpo=[];linhas.forEach(function(l){doc.setFontSize(9.5);corpo=corpo.concat(doc.splitTextToSize('•  '+l,w-8));});
+      var ex=extra?doc.splitTextToSize(extra,w-8):[];var h=12+corpo.length*4.6+(ex.length?ex.length*4.2+2:0)+2;
+      caixa(x,yy,w,h);fonte(9.5,true);cor(VERDE);doc.text(titulo,x+4,yy+7);fonte(9.5);cor(ESC);doc.text(corpo,x+4,yy+13);
+      if(ex.length){fonte(8.5);cor(CINZA);doc.text(ex,x+4,yy+13+corpo.length*4.6+1.5);}
+      return h;
+    }
+    var w2=(X2-M-6)/2;
+    var h1=bloco(M,y,w2,'O QUE ESTÁ INCLUSO',['Salão para até 300 pessoas','Piscina','Churrasqueira','1 fogão industrial','1 freezer','25 mesas e 64 cadeiras'],'O botijão de gás é de responsabilidade do locatário.');
+    var h2=bloco(M+w2+6,y,w2,'HORÁRIOS',['Montagem: espaço liberado 3h antes do início (a partir das 06h). Mais tempo ou montagem na noite anterior: combinar conosco.','Hora excedente: R$ 100,00 por hora ou fração após o horário contratado, com tolerância de 30 minutos. Depois disso, as tomadas do salão são desligadas.']);
+    y+=Math.max(h1,h2)+6;
+    y+=bloco(M,y,X2-M,'REGRAS DE UTILIZAÇÃO',['Espaço destinado exclusivamente a eventos particulares, familiares e sem fins lucrativos, fechados ao público.','Não é permitido vender ingressos, bebidas, alimentos, rifas ou realizar qualquer tipo de comércio.','Som permitido apenas até o horário contratado e em volume que não incomode a vizinhança.','O salão deve ser entregue varrido, com todo o lixo ensacado no local indicado. Lixo deixado na calçada: taxa de R$ 200,00.','Qualquer dano ou quebra de materiais será cobrado do responsável.','Evento comercial ou descumprimento grave das regras encerra a locação imediatamente, sem devolução dos valores pagos.'])+6;
+    var h3=bloco(M,y,w2,'RESERVA E DESISTÊNCIA',['A data só fica garantida após o pagamento do sinal.','Restante até 12h do dia útil anterior ao evento.','Sem pagamento no prazo, a reserva é cancelada.','Em caso de desistência, o sinal não é devolvido.']);
+    var h4=bloco(M+w2+6,y,w2,'PARA FECHAR O CONTRATO',['Cópia do RG e CPF do responsável.','Assinatura digital do contrato e do termo de responsabilidade.','Comprovante do PIX do sinal.']);
+    y+=Math.max(h3,h4)+8;
+    fundo(ESC);doc.roundedRect(M,y,X2-M,20,2.5,2.5,'F');
+    fonte(12,true);doc.setTextColor(255,255,255);doc.text('Gostou? Garanta sua data.',M+5,y+8.5);
+    fonte(9);doc.setTextColor(185,211,199);doc.text('Envie o comprovante do sinal pelo WhatsApp '+EMPRESA.contato+'.',M+5,y+14.5);
+    fonte(8.5);doc.text('Total',X2-5,y+7.5,{align:'right'});fonte(15,true);doc.setTextColor(255,255,255);doc.text(brl(t.total),X2-5,y+14.5,{align:'right'});
+    traco(LINHA);doc.setLineWidth(.3);doc.line(M,284,X2,284);fonte(8);cor(CINZA);doc.text(EMPRESA.nome+' · '+EMPRESA.titular+' · Teresina-PI',M,289);doc.text('Página 2 de 2',X2,289,{align:'right'});
+    return doc;
+  }
+  function nomeArquivo(){var n=(lerCliente().nome||'cliente').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^A-Za-z0-9 ]/g,'').trim();return 'Orcamento '+numeroAtual+' - '+n+'.pdf';}
+
+  $('btnEnviar').addEventListener('click',function(){
+    if(!prontoParaEnviar())return;
+    try{
+      garantirNumero();var doc=gerarPdf();var blob=doc.output('blob');var arq=new File([blob],nomeArquivo(),{type:'application/pdf'});
+      if(navigator.canShare&&navigator.canShare({files:[arq]})){
+        navigator.share({files:[arq],title:'Orçamento WIL EVENTOS nº '+numeroAtual}).then(function(){avisar('ok','Orçamento nº '+numeroAtual+' enviado. Agora use "Copiar resumo para o sistema" quando for lançar no computador.');}).catch(function(e){if(e&&e.name!=='AbortError')avisar('erro','Não foi possível compartilhar: '+e.message);});
+      }else{doc.save(nomeArquivo());avisar('info','Este aparelho não permite compartilhar direto. O PDF foi baixado: anexe-o na conversa do WhatsApp.');}
+    }catch(e){avisar('erro',e.message||String(e));}
+  });
+  $('btnBaixar').addEventListener('click',function(){if(!prontoParaEnviar())return;try{garantirNumero();gerarPdf().save(nomeArquivo());avisar('ok','PDF do orçamento nº '+numeroAtual+' baixado.');}catch(e){avisar('erro',e.message||String(e));}});
+
+  // ---------- resumo para o sistema ----------
+  function resumo(){
+    var d=lerCliente(),t=calcularTotais(),c={ini:ini,fim:fim};
+    var l=['*ORÇAMENTO WIL EVENTOS Nº '+numeroAtual+'*','Data: '+dataCurta(),'Início: '+P.hhmm(c.ini),'Término: '+P.hhmm(c.fim)+(c.fim>=24?' (dia seguinte)':''),
+      'Tipo de evento: '+d.tipo,'Nome: '+d.nome,'CPF: '+d.cpf,'Telefone: '+d.telefone,'Endereço: '+d.endereco,'Número: '+d.numero,'Bairro: '+d.bairro,'CEP: '+d.cep,
+      'Valor da locação: '+brl(t.loc)];
+    itensAtivos().forEach(function(i){l.push('Adicional: '+i.desc+' | '+i.qtd+' | '+brl(i.valor));});
+    if(t.desc>0) l.push('Desconto: '+brl(t.desc));
+    l.push('Total: '+brl(t.total));
+    var obs=String($('obs').value||'').trim(); if(obs) l.push('Observações: '+obs.replace(/\s*\n\s*/g,' '));
+    return l.join('\n');
+  }
+  $('btnCopiar').addEventListener('click',function(){
+    if(!prontoParaEnviar())return;garantirNumero();var txt=resumo();
+    function ok(){avisar('ok','Resumo copiado. No computador: "Colar solicitação" no sistema e colar. Dica: mande para você mesmo no WhatsApp para não perder.');}
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(ok).catch(function(){copiaManual(txt);});}else copiaManual(txt);
+    function copiaManual(t){$('mensagem').value=t;$('mensagem').select();try{document.execCommand('copy');ok();}catch(e){avisar('info','Copie o texto do campo "Solicitação do cliente".');}}
+  });
+  $('btnNovo').addEventListener('click',function(){
+    if(!confirm('Começar um novo orçamento? Os dados desta tela serão apagados.'))return;
+    CLIENTE.concat(['obs','mensagem','desconto']).forEach(function(k){$(k).value='';});$('data').value='';
+    ini=cfg.atalhos[0].ini;fim=cfg.atalhos[0].fim;locacaoManual=false;numeroAtual='';tentou=false;
+    itens=ITENS_PADRAO.map(function(i){return{desc:i.desc,ativo:false,qtd:1,valor:Number(ultimos[i.desc]||0)};});
+    mostrarErros({});$('statusAcao').classList.add('oculto');lerMensagemColada();desenharItens();desenharHorario();atualizarEmitente();window.scrollTo(0,0);
+  });
+
+  window.__orcamento={resumo:resumo,gerarPdf:gerarPdf,calcularTotais:calcularTotais,garantirNumero:garantirNumero};
+  desenharItens();desenharHorario();atualizarEmitente();
+  if(!serie()) abrirAjustes();
+})();
+</script>
+</body>
+</html>
