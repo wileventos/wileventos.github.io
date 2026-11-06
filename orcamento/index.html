@@ -87,6 +87,12 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #2b6c
     <button type="button" class="icone" id="btnAjustes" aria-label="Ajustes do orçamento"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   </header>
 
+  <!-- Link da agenda para o cliente -->
+  <section class="cartao" style="flex-direction:row;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px">
+    <div style="min-width:0"><b style="display:block;font-size:15px;color:var(--verde-esc)">Link da agenda</b><span style="font-size:12px;color:var(--suave)">Para o cliente ver as datas e pedir orçamento</span></div>
+    <button type="button" class="botao" id="btnCopiarAgenda" style="flex:0 0 auto;min-height:46px">Copiar link</button>
+  </section>
+
   <!-- 1. Colar -->
   <section class="cartao">
     <h2>1. Solicitação do cliente</h2>
@@ -505,6 +511,15 @@ button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #2b6c
     ini=cfg.atalhos[0].ini;fim=cfg.atalhos[0].fim;locacaoManual=false;numeroAtual='';tentou=false;
     itens=ITENS_PADRAO.map(function(i){return{desc:i.desc,ativo:false,qtd:1,valor:Number(ultimos[i.desc]||0)};});
     mostrarErros({});$('statusAcao').classList.add('oculto');lerMensagemColada();desenharItens();desenharHorario();atualizarEmitente();window.scrollTo(0,0);
+  });
+
+  // ---------- copiar o link da agenda para mandar ao cliente ----------
+  var TEXTO_AGENDA='📅 Confira as datas disponíveis do WIL EVENTOS, monte seu horário e solicite seu orçamento:\nhttps://wileventos.github.io';
+  $('btnCopiarAgenda').addEventListener('click',function(){
+    var b=$('btnCopiarAgenda');
+    function feito(ok){b.textContent=ok?'✓ Copiado':'Não copiou';setTimeout(function(){b.textContent='Copiar link';},2500);}
+    function manual(){var ta=document.createElement('textarea');ta.value=TEXTO_AGENDA;ta.setAttribute('readonly','');ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();var ok=false;try{ok=document.execCommand('copy');}catch(e){}document.body.removeChild(ta);feito(ok);}
+    if(navigator.clipboard&&navigator.clipboard.writeText) navigator.clipboard.writeText(TEXTO_AGENDA).then(function(){feito(true);}).catch(manual); else manual();
   });
 
   window.__orcamento={resumo:resumo,gerarPdf:gerarPdf,calcularTotais:calcularTotais,garantirNumero:garantirNumero};
